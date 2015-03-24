@@ -1,1 +1,1 @@
-This is the home pageq
+This is the home page
