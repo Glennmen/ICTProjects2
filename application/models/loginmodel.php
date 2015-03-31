@@ -6,27 +6,41 @@ class LoginModel extends CI_Model {
 		parent::__construct();
 	}
         
-        public function getLoginForm(/*$username, $password*/)
+        public function getLoginForm()
         {
             $this->load->helper('form');
             
-            $data = array(
+            $username = array(
               'name'        => 'username',
               'id'          => 'username',
-              'value'       => 'johndoe',
+              'value'       => '',
               'maxlength'   => '100',
               'size'        => '50',
               'style'       => 'width:50%',
             );
             
-            echo form_input($data);
+            $password = array(
+              'name'        => 'password',
+              'id'          => 'password',
+              'value'       => '',
+              'maxlength'   => '100',
+              'size'        => '50',
+              'style'       => 'width:50%',
+            );
             
             $this->load->library('table');
             
-            $this->table->set_heading('<b>Login</b>', '<b>Password</b>');
+            $htmlContent = form_open();
             
-            $this->table->add_row('<p><input type="text" name="login" value="" placeholder="Username or Email"></p>', '<p><input type="password" name="password" value="" placeholder="Password"></p>');
+            $this->table->add_row("login:",form_input($username));
+            $this->table->add_row("password:",form_password($password));
+            $this->table->add_row(form_submit("login", "Aanmelden"),form_reset("reset", "Reset"));
+            
 
-            echo $this->table->generate();
+            $htmlContent .= $this->table->generate();
+            
+            $htmlContent .= form_close();
+                    
+            return $htmlContent;
         }
 }
