@@ -18,7 +18,9 @@ class EventsClass {
      
      public function getAllEventsData()
      {
+         $this->load->database('eventsdatabase');
          
+         $sQuery = "";
      }
      
      public function getDataSelectedEvent()
@@ -38,6 +40,17 @@ class EventsClass {
      
      public function saveNewEventData()
      {
+         try
+         {
+         $this->load->database('eventsdatabase');
          
+         $sQuery = "INSERT INTO events(EventName,StartDate,EndDate,StartTime,EndTime,Location,Description,EventOrganizer)"
+                 . "VALUES ('EventTest','27/04/2015','27/04/2015','17:00','18:00','Hamont-Achel','test','Michiel')";
+         $this->db->query($sQuery);
+         }
+         catch(PDOException $oError)
+         {
+             echo $oError->getMessage();
+         }
      }
 }

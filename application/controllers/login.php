@@ -8,9 +8,7 @@ class Login extends CI_Controller {
                 
                 $data['htmlContent'] = $this->LoginModel->getLoginForm();
                 
-                $this->load->view('view', $data);
-                
-                
-	}
+                $this->load->view('view', $data);     
+        }
 }
 ?>

@@ -6,17 +6,12 @@
  * and open the template in the editor.
  */
 
-Class Database extends CI_Controller {
-    public function index()
+class EventsController extends CI_Controller {
+    
+    public function index() 
     {
         $this->load->model('EventsModel');
-        
         $data['htmlContent'] = $this->EventsModel->getEventCreateForm();
-        
-        if(isset($_POST['toevoegen']))
-        {
-            $this->EventsModel->createEvent();
-        }
         
         $this->load->view('view', $data);
     }
