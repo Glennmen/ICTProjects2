@@ -40,7 +40,7 @@ class EventsModel extends CI_Model {
         $htmlContent = form_open();
         
         $name = array(
-            'name'        => 'eventName',
+            'name'        => 'eventname',
             'id'          => 'name',
             'value'       => '',
             'maxlength'   => '100',
@@ -48,13 +48,86 @@ class EventsModel extends CI_Model {
             'style'       => 'width:50%',
         );
         
+        $organizer = array(
+            'name'        => 'eventorganizer',
+            'id'          => 'organizer',
+            'value'       => '',
+            'maxlength'   => '100',
+            'size'        => '50',
+            'style'       => 'width:50%',
+        );
+        
+        $startDate = array(
+            'name'        => 'startdate',
+            'id'          => 'startDate',
+            'value'       => '',
+            'maxlength'   => '100',
+            'size'        => '50',
+            'style'       => 'width:50%',
+        );
+        
+        $endDate = array(
+            'name'        => 'enddate',
+            'id'          => 'endDate',
+            'value'       => '',
+            'maxlength'   => '100',
+            'size'        => '50',
+            'style'       => 'width:50%',
+        );
+        
+        $startTime = array(
+            'name'        => 'starttime',
+            'id'          => 'startTime',
+            'value'       => '',
+            'maxlength'   => '100',
+            'size'        => '50',
+            'style'       => 'width:50%',
+        );
+        
+        $endTime = array(
+            'name'        => 'endtime',
+            'id'          => 'endTime',
+            'value'       => '',
+            'maxlength'   => '100',
+            'size'        => '50',
+            'style'       => 'width:50%',
+        );
+        
+        $availableTickets = array(
+            'name'        => 'availabletickets',
+            'id'          => 'availableTickets',
+            'value'       => '',
+            'maxlength'   => '100',
+            'size'        => '50',
+            'style'       => 'width:50%',
+        );
+        
+        $location = array(
+            'name'        => 'location',
+            'id'          => 'location',
+            'value'       => '',
+            'maxlength'   => '100',
+            'size'        => '50',
+            'style'       => 'width:50%',
+        );
+        
+        $description = array(
+            'name'        => 'description',
+            'id'          => 'description',
+            'value'       => '',
+            'rows'        => '4',
+            'cols'        => '25',
+        );
+        
         $this->table->add_row("Event name: ", form_input($name));
-        $this->table->add_row("Start date: ", form_input());
-        $this->table->add_row("End date: ", form_input());
-        $this->table->add_row("Start time: ", form_input());
-        $this->table->add_row("End time: ", form_input());
-        $this->table->add_row("Available tickets: ", form_input());
-        $this->table->add_row("Description: ", form_input());
+        $this->table->add_row("Event organizer: ", form_input($organizer));
+        $this->table->add_row("Start date: ", form_input($startDate));
+        $this->table->add_row("End date: ", form_input($endDate));
+        $this->table->add_row("Start time: ", form_input($startTime));
+        $this->table->add_row("End time: ", form_input($endTime));
+        $this->table->add_row("Available tickets: ", form_input($availableTickets));
+        $this->table->add_row("Location: ", form_input($location));
+        $this->table->add_row("Description: ", form_textarea($description));
 
         $this->table->add_row(form_submit('toevoegen', 'Add'));
         
@@ -64,9 +137,9 @@ class EventsModel extends CI_Model {
         return $htmlContent;
     }
     
-    public function createEvent()
+    public function createEvent($aEventsData)
     {
-        $this->load->library('EventsClass');
-        $this->EventsClass->saveNewEventData();
+        $this->load->library('eventsclass');
+        $this->eventsclass->saveNewEventData($aEventsData);
     }
 }
