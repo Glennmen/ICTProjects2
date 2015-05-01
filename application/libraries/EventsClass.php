@@ -18,7 +18,21 @@ class EventsClass {
      
      public function getAllEventsData()
      {
-         
+         try
+         {
+         $ci =& get_instance();
+         $ci->load->database('databaseprojects');
+         $sQuery = "SELECT * FROM eventsdatabase";
+         $oData = $this->db->query($sQuery);
+         foreach ($oData as $oDataItem)
+         {
+             
+         }
+         } 
+         catch (Exception $ex) 
+         {
+
+         }
      }
      
      public function getDataSelectedEvent()
@@ -52,7 +66,7 @@ class EventsClass {
          $sLocation = $aEventsData['Location'];
          $sDescription = $aEventsData['Description'];
          $sQuery = "INSERT INTO eventsdatabase (EventName,EventOrganizer,StartDate,EndDate,StartTime,EndTime,AvailableTickets,Location,Description)"
-                 . "VALUES ($sEventName,$sEventOrganizer,$sStartDate,$sEndDate,$sStartTime,$sEndTime,$sAvailableTickets,$sLocation,$sDescription)";
+                 . "VALUES ('$sEventName','$sEventOrganizer','$sStartDate','$sEndDate','$sStartTime','$sEndTime','$sAvailableTickets','$sLocation','$sDescription')";
          $ci->db->query($sQuery);
          }
          catch(PDOException $oError)
