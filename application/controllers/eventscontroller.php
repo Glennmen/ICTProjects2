@@ -13,7 +13,14 @@ class EventsController extends CI_Controller {
         //session_start() => eerste commando van de pagina in het index.php bestand
         //redbeans
         $this->load->model('EventsModel');
-        $data['htmlContent'] = $this->EventsModel->getEventCreateForm();
+        $this->load->model('NavigationModel');
+        $data['Menu'] = $this->NavigationModel->Menu();
+        $data['htmlContent'] = $this->EventsModel->eventsHomePage();
+        
+        if(isset($_POST['createEvent']))
+        {
+            $data['htmlContent'] = $this->EventsModel->getEventCreateForm();
+        }
         if(isset($_POST['toevoegen']))
         {
             $aEventsData = array (
@@ -29,7 +36,10 @@ class EventsController extends CI_Controller {
             );
             $this->EventsModel->createEvent($aEventsData);
         }
-        
+        if(isset($_POST['allEvents']))
+        {
+            $data['htmlContent'] = $this->EventsModel->getAllEvents();
+        }       
         $this->load->view('view', $data);
     }
 }

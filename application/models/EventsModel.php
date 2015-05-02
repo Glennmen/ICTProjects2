@@ -12,9 +12,25 @@ class EventsModel extends CI_Model {
 		parent::__construct();
 	}
         
+    public function eventsHomePage()
+    {
+        $this->load->helper('form');
+        $this->load->library('table');
+        
+        $sEventsHome = form_open();
+        
+        $this->table->add_row(form_submit('createEvent', 'Create an event'), form_submit('allEvents', 'Eventslist'));
+        $sEventsHome .= $this->table->generate();
+        $sEventsHome .= form_close();
+        
+        return $sEventsHome;
+    }
+        
     public function getAllEvents()
     {
-        
+        $this->load->library('eventsclass');
+        $sEventsList = $this->eventsclass->getAllEventsData();
+        return $sEventsList;
     }
     
     public function getDataSelectedEventModel()

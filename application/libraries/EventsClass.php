@@ -17,22 +17,46 @@ class EventsClass {
      public $sDescription;
      
      public function getAllEventsData()
-     {
+     {      
+         $ci =& get_instance();
          try
          {
-         $ci =& get_instance();
+         $sEventsList = "<table border='1'><th><td>Event name</td><td>Organizer</td><td>Start date</td>"
+                 . "<td>End date</td><td>Start time</td><td>End time</td><td>Available tickets</td>"
+                 . "<td>Location</td><td>Description</td></th>";
          $ci->load->database('databaseprojects');
          $sQuery = "SELECT * FROM eventsdatabase";
-         $oData = $this->db->query($sQuery);
-         foreach ($oData as $oDataItem)
+         $sData = $ci->db->query($sQuery);
+         foreach($sData->result_array() as $sRow)
          {
-             
+             $sEventsList .= "<tr><td></td><td>";
+             $sEventsList .= $sRow['EventName'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['EventOrganizer'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['StartDate'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['EndDate'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['StartTime'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['EndTime'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['AvailableTickets'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['Location'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['Description'];
+             $sEventsList .= "</td></tr>";
          }
+         $sEventsList .= "</table>";
+         return $sEventsList;
          } 
-         catch (Exception $ex) 
+         catch (Exception $oError) 
          {
-
+            echo $oError->getMessage();
          }
+         
      }
      
      public function getDataSelectedEvent()
@@ -56,17 +80,17 @@ class EventsClass {
          {
          $ci =& get_instance();
          $ci->load->database('databaseprojects');
-         $sEventName = $aEventsData['EventName'];
-         $sEventOrganizer = $aEventsData['EventOrganizer'];
-         $sStartDate = $aEventsData['StartDate'];
-         $sEndDate = $aEventsData['EndDate'];
-         $sStartTime = $aEventsData['StartTime'];
-         $sEndTime = $aEventsData['EndTime'];
-         $sAvailableTickets = $aEventsData['AvailableTickets'];
-         $sLocation = $aEventsData['Location'];
-         $sDescription = $aEventsData['Description'];
+         $this->sEventName = $aEventsData['EventName'];
+         $this->sEventOrganizer = $aEventsData['EventOrganizer'];
+         $this->sStartDate = $aEventsData['StartDate'];
+         $this->sEndDate = $aEventsData['EndDate'];
+         $this->sStartTime = $aEventsData['StartTime'];
+         $this->sEndTime = $aEventsData['EndTime'];
+         $this->iAvailableTickets = $aEventsData['AvailableTickets'];
+         $this->sLocation = $aEventsData['Location'];
+         $this->sDescription = $aEventsData['Description'];
          $sQuery = "INSERT INTO eventsdatabase (EventName,EventOrganizer,StartDate,EndDate,StartTime,EndTime,AvailableTickets,Location,Description)"
-                 . "VALUES ('$sEventName','$sEventOrganizer','$sStartDate','$sEndDate','$sStartTime','$sEndTime','$sAvailableTickets','$sLocation','$sDescription')";
+                 . "VALUES ('$this->sEventName','$this->sEventOrganizer','$this->sStartDate','$this->sEndDate','$this->sStartTime','$this->sEndTime','$this->iAvailableTickets','$this->sLocation','$this->sDescription')";
          $ci->db->query($sQuery);
          }
          catch(PDOException $oError)

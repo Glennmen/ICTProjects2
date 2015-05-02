@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = 'login';
+$route['default_controller'] = 'home';
 //$route['(:any)'] = 'pages/view/$1';
 
 
