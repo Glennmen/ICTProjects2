@@ -14,30 +14,50 @@ class LoginModel extends CI_Model {
               'name'        => 'username',
               'id'          => 'username',
               'value'       => '',
-              'maxlength'   => '100',
-              'size'        => '50',
-              'style'       => 'width:50%',
+              'class'       => 'form-control',
+              'placeholder' => 'Login',
             );
             
             $password = array(
               'name'        => 'password',
               'id'          => 'password',
               'value'       => '',
-              'maxlength'   => '100',
-              'size'        => '50',
-              'style'       => 'width:50%',
+              'class'       => 'form-control',
+              'placeholder' => 'Password',
             );
             
-            $this->load->library('table');
+            $submit = array(
+                'name'      => 'login',
+                'class'     => 'btn btn-default',
+            );
             
-            $htmlContent = form_open();
+            $form = array(
+              'class'       => 'form-horizontal'  
+            );
             
-            $this->table->add_row("login:",form_input($username));
-            $this->table->add_row("password:",form_password($password));
-            $this->table->add_row(form_submit("login", "Aanmelden"),form_reset("reset", "Reset"));
+            $htmlContent = form_open('',$form);
             
-
-            $htmlContent .= $this->table->generate();
+            $htmlContent .= 
+            '<div class="form-group">
+                <label for="username" class="col-sm-2 control-label">Login</label>
+                <div class="col-sm-10">';
+            $htmlContent .= form_input($username);
+            $htmlContent .= 
+                '</div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">';
+            $htmlContent .= form_password($password);
+            $htmlContent .= 
+                '</div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">';
+            $htmlContent .=  form_submit($submit, "Aanmelden");
+            $htmlContent .= 
+                '</div>
+            </div>';
             
             $htmlContent .= form_close();
                     
