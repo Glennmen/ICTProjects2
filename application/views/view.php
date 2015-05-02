@@ -31,12 +31,14 @@
         <div class="page-header">
             <h1><?php echo $pageTitle ?></h1>
         </div>
-        
+          <?php echo $Menu ?>
+        <br />
           <?php echo $htmlContent ?>
 
     </div><!-- /.container -->
  
     <script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.js'); ?>"></script>
+>>>>>>> .r28
     </body>
 </html>
