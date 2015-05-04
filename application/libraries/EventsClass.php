@@ -47,6 +47,8 @@ class EventsClass {
              $sEventsList .= $sRow['Location'];
              $sEventsList .= "</td><td>";
              $sEventsList .= $sRow['Description'];
+             $sEventsList .="</td><td>";
+             $sEventsList .= "<input type='submit' name='delete' value='Delete'";
              $sEventsList .= "</td></tr>";
          }
          $sEventsList .= "</table>";
@@ -66,12 +68,34 @@ class EventsClass {
      
      public function saveChanges()
      {
+         $ci =& get_instance();
+         try
+         {
+             $ci->load->database('databaseprojects');
+             $sQuery = "UPDATE";
+         } 
+         catch (Exception $oError) 
+         {
+             echo $oError->getMessage();
+         }
+     }
+     
+     public function getDescription()
+     {
          
      }
      
      public function deleteEvent()
      {
-         
+         $ci =& get_instance();
+         try
+         {
+             
+         } 
+         catch (Exception $oError) 
+         {
+             echo $oError->getMessage();
+         }
      }
      
      public function saveNewEventData($aEventsData)

@@ -19,9 +19,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+              <?php echo $Menu ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -31,7 +29,6 @@
         <div class="page-header">
             <h1><?php echo $pageTitle ?></h1>
         </div>
-          <?php echo $Menu ?>
         <br />
           <?php echo $htmlContent ?>
 
@@ -39,6 +36,5 @@
  
     <script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.js'); ?>"></script>
->>>>>>> .r28
     </body>
 </html>

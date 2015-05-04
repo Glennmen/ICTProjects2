@@ -12,15 +12,23 @@ class EventsModel extends CI_Model {
 		parent::__construct();
 	}
         
+    public function getPageTitle()
+    {
+        $sPageTitle = "Events page";
+        return $sPageTitle;
+    }
+        
     public function eventsHomePage()
     {
         $this->load->helper('form');
-        $this->load->library('table');
         
         $sEventsHome = form_open();
         
-        $this->table->add_row(form_submit('createEvent', 'Create an event'), form_submit('allEvents', 'Eventslist'));
-        $sEventsHome .= $this->table->generate();
+        $sEventsHome .= "<table>"
+                . "<tr><td><input type='submit' name='createEvent' value='Create Event' />"
+                . "<input type='submit' name='allEvents' value='Eventslist' /></td></tr>"
+                . "</table>";
+        
         $sEventsHome .= form_close();
         
         return $sEventsHome;
@@ -51,103 +59,23 @@ class EventsModel extends CI_Model {
     public function getEventCreateForm()
     {
         $this->load->helper('form');
-        $this->load->library('table');
         
         $htmlContent = form_open();
         
-        $name = array(
-            'name'        => 'eventname',
-            'id'          => 'name',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
+        $htmlContent .= "<table>"
+                ."<tr><td>Event name: </td><td><input type='text' name='eventname' /></td></tr>"
+                ."<tr><td>Event organizer: </td><td><input type='text' name='eventorganizer' /></td></tr>"
+                ."<tr><td>Start date: </td><td><input type='text' name='startdate' /></td></tr>"
+                ."<tr><td>End date: </td><td><input type='text' name='enddate' /></td></tr>"
+                ."<tr><td>Start time: </td><td><input type='text' name='starttime' /></td></tr>"
+                ."<tr><td>End time: </td><td><input type='text' name='endtime' /></td></tr>"
+                ."<tr><td>Available tickets: </td><td><input type='text' name='availabletickets' /></td></tr>"
+                ."<tr><td>Location: </td><td><input type='text' name='location' /></td></tr>"
+                ."<tr><td>Description: </td><td><textarea name='description' rows='4' cols='40' ></textarea></td></tr>"
+                ."<tr><td colspan='2'><input type='submit' name='toevoegen' value='Add' /><input type='submit' name='clear' value='Clear' />"
+                . "<input type='submit' name='annuleren' value='Cancel' /></td></tr>"
+                . "</table>";
         
-        $organizer = array(
-            'name'        => 'eventorganizer',
-            'id'          => 'organizer',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-        
-        $startDate = array(
-            'name'        => 'startdate',
-            'id'          => 'startDate',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-        
-        $endDate = array(
-            'name'        => 'enddate',
-            'id'          => 'endDate',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-        
-        $startTime = array(
-            'name'        => 'starttime',
-            'id'          => 'startTime',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-        
-        $endTime = array(
-            'name'        => 'endtime',
-            'id'          => 'endTime',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-        
-        $availableTickets = array(
-            'name'        => 'availabletickets',
-            'id'          => 'availableTickets',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-        
-        $location = array(
-            'name'        => 'location',
-            'id'          => 'location',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-        
-        $description = array(
-            'name'        => 'description',
-            'id'          => 'description',
-            'value'       => '',
-            'rows'        => '4',
-            'cols'        => '25',
-        );
-        
-        $this->table->add_row("Event name: ", form_input($name));
-        $this->table->add_row("Event organizer: ", form_input($organizer));
-        $this->table->add_row("Start date: ", form_input($startDate));
-        $this->table->add_row("End date: ", form_input($endDate));
-        $this->table->add_row("Start time: ", form_input($startTime));
-        $this->table->add_row("End time: ", form_input($endTime));
-        $this->table->add_row("Available tickets: ", form_input($availableTickets));
-        $this->table->add_row("Location: ", form_input($location));
-        $this->table->add_row("Description: ", form_textarea($description));
-
-        $this->table->add_row(form_submit('toevoegen', 'Add'));
-        
-        $htmlContent .= $this->table->generate();
         $htmlContent .= form_close();
         
         return $htmlContent;

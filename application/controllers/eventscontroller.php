@@ -14,6 +14,7 @@ class EventsController extends CI_Controller {
         //redbeans
         $this->load->model('EventsModel');
         $this->load->model('NavigationModel');
+        $data['pageTitle'] = $this->EventsModel->getPageTitle();
         $data['Menu'] = $this->NavigationModel->Menu();
         $data['htmlContent'] = $this->EventsModel->eventsHomePage();
         
@@ -36,10 +37,18 @@ class EventsController extends CI_Controller {
             );
             $this->EventsModel->createEvent($aEventsData);
         }
+        if(isset($_POST['clear']))
+        {
+            $data['htmlContent'] = $this->EventsModel->getEventCreateForm();
+        }
+        if(isset($_POST['cancel']))
+        {
+            $data['htmlContent'] = $this->EventsModel->eventsHomePage();
+        }
         if(isset($_POST['allEvents']))
         {
             $data['htmlContent'] = $this->EventsModel->getAllEvents();
-        }       
+        }     
         $this->load->view('view', $data);
     }
 }
