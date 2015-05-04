@@ -5,7 +5,7 @@ class Login extends CI_Controller {
     function __construct()
     {
             parent::__construct();
-            $this->load->library('LoginClass');
+            $this->load->library('loginclass');
 
     }
         
@@ -34,13 +34,13 @@ class Login extends CI_Controller {
 
     }
     
-    public function checkLoginAndPassword()
+    public function checkLoginAndPassword($password)
     {
         //Field validation succeeded.  Validate against database
         $username = $this->input->post('username');
 
         //query the database
-        $result = $this->LoginClass->loginQuery($username, $password);
+        $result = $this->loginclass->loginQuery($username, $password);
 
         if($result)
         {
@@ -57,7 +57,7 @@ class Login extends CI_Controller {
         }
         else
         {
-             $this->form_validation->set_message('check_database', 'Invalid username or password');
+             $this->form_validation->set_message('checkLoginAndPassword', 'Invalid username or password');
              return false;
         }
 

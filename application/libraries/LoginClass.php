@@ -10,15 +10,18 @@ class LoginClass {
     
  function loginQuery($username, $password)
  {
-    $this -> db -> select('id, username, password');
-    $this -> db -> from('users');
-    $this -> db -> where('username', $username);
-    $this -> db -> where('password', MD5($password));
-    $this -> db -> limit(1);
+    $ci =& get_instance();
+    $ci->load->database();
+    
+    $ci->db->select('id, username, password');
+    $ci->db->from('users');
+    $ci->db->where('username', $username);
+    $ci->db->where('password', MD5($password));
+    $ci->db->limit(1);
 
-    $query = $this -> db -> get();
+    $query = $ci->db->get();
 
-    if($query -> num_rows() == 1)
+    if($query->num_rows() == 1)
     {
         return $query->result();
     }
