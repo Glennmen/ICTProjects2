@@ -13,6 +13,7 @@ class OrderModel extends CI_Model{
     
     public function getOrderForm()
     {
+        try {
         $ci =& get_instance();
         $this->load->helper('form');
         $this->load->library('table');
@@ -37,9 +38,9 @@ class OrderModel extends CI_Model{
             'style'       => 'width:50%',
         );
          
-         $address = array(
-            'name'        => 'address',
-            'id'          => 'address',
+         $adress = array(
+            'name'        => 'adress',
+            'id'          => 'adress',
             'value'       => '',
             'maxlength'   => '100',
             'size'        => '50',
@@ -72,36 +73,52 @@ class OrderModel extends CI_Model{
             'maxlength'   => '100',
             'size'        => '50',
             'style'       => 'width:50%',
+            'required'    => 'required',
         );
-         $ci->load->database('databaseprojects');
-         $sQuery = "SELECT * FROM eventsdatabase";
-         $sData = $ci->db->query($sQuery);
-         $iTeller = 0;
-         foreach ($sData->result_query() as $sRow) {
-            
-            $events = array(
-            'event'+$iTeller => $sRow['EventName'], 
-            ); 
-         }
          
+         $events = array();
+         $ci->load->database('');
+         $query  = "SELECT * FROM eventsdatabase";
+         $sData = $ci->db->query($query);
+         
+             foreach ($sData->result_array() as $sRow)
+             {
+                $events[$sRow['EventID']] = $sRow['EventName']; 
+             }        
+         
+             
          $this->table->add_row("Customer name: ",  form_input($name));
          $this->table->add_row("First name: ",  form_input($fname));
-         $this->table->add_row("Adress: ",  form_input($address));
+         $this->table->add_row("Adress: ",  form_input($adress));
          $this->table->add_row("E-mail: ",  form_input($mail));
          $this->table->add_row("Passnumber: ",  form_input($passnumber));
          $this->table->add_row("Ticketamount: ", form_input($tickets));
          $this->table->add_row("Event", form_dropdown("Events",$events));
+
+         $this->table->add_row(form_submit('submitOrderbtn','Order'),form_reset('Reset','Reset'));
          
-         $this->table->add_row(form_submit('Bestellen','Order'));
-         
-         $htmlContent.= '<h1>Order Form</h1>';
          $htmlContent.=$this->table->generate();
          $htmlContent.= form_close();
          return $htmlContent;   
+    
+     } catch (Exception $oError) {
+            echo $oError->getMessage();
+        }
     }
     
     public function confirmOrder()
-    {
+    { 
+        $htmlContent = form_open();
+        if(isset($_POST['submitOrderbtn']))
+        {
+            $ci->load->database('');
+            $query=("INSERT INTO orderdatabase VALUES('$name','$fname',$adress,$mail,NOW())"); 
+            $htmlContent .= '<h2>Order is succesvol geplaatst</h2>';
+        }    
+       
         
+        $htmlContent .= form_close();
+        
+        return $htmlContent;
     }
 }
