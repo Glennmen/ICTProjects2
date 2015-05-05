@@ -6,12 +6,18 @@
  * and open the template in the editor.
  */
 
-class RegistartionClass {
+class RegistrationClass {
     public $sAccountType;
-    public $sTelephoneNumber;
-    public $sMobileNumber;
-    public $sLogin;
+    public $sUsername;
     public $sPassword;
+    public $sFirstName;
+    public $sLastName;
+    public $iRegisterNumber;
+    public $sEmail;
+    public $sStreet;
+    public $iCityCode;
+    public $sCity;
+    public $iPhoneNumber;
     
     public function checkCorrectData()
     {
