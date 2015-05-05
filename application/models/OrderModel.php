@@ -13,6 +13,7 @@ class OrderModel extends CI_Model{
     
     public function getOrderForm()
     {
+        $ci =& get_instance();
         $this->load->helper('form');
         $this->load->library('table');
         
@@ -72,10 +73,16 @@ class OrderModel extends CI_Model{
             'size'        => '50',
             'style'       => 'width:50%',
         );
-         $events = array(
-           'event1'       => 'Event 1',
-           'event2'       => 'Event 2',
-         );
+         $ci->load->database('databaseprojects');
+         $sQuery = "SELECT * FROM eventsdatabase";
+         $sData = $ci->db->query($sQuery);
+         $iTeller = 0;
+         foreach ($sData->result_query() as $sRow) {
+            
+            $events = array(
+            'event'+$iTeller => $sRow['EventName'], 
+            ); 
+         }
          
          $this->table->add_row("Customer name: ",  form_input($name));
          $this->table->add_row("First name: ",  form_input($fname));
