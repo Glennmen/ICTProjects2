@@ -63,4 +63,13 @@ class LoginModel extends CI_Model {
                     
             return $htmlContent;
         }
+        
+        public function loginError()
+        {
+            $htmlContent = '<div class="alert alert-danger" role="alert">';
+            $htmlContent .= validation_errors();
+            $htmlContent .= '</div>';
+            
+            return $htmlContent;
+        }
 }

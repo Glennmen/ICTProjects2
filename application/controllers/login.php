@@ -25,8 +25,20 @@ class Login extends CI_Controller {
 
           if($this->form_validation->run() == FALSE)
           {
-            //Field validation failed.  User redirected to login page
-            $this->load->view('view', $data);   
+              if(validation_errors() != "")
+              {
+                //Field validation failed.  User redirected to login page
+                $error = $this->LoginModel->loginError();
+                $form = $this->LoginModel->getLoginForm();
+                $array = array($error, $form);
+                $data['htmlContent'] = join("", $array);
+                $this->load->view('view', $data);
+              }
+              else 
+              {
+                  $this->load->view('view', $data);
+              }
+               
           }
           else
           {
@@ -63,6 +75,12 @@ class Login extends CI_Controller {
              return false;
         }
 
+    }
+    
+    function logout()
+    {
+        $this->session->unset_userdata('logged_in');
+        redirect('home', 'refresh');
     }
 }
 ?>

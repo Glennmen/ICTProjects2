@@ -15,7 +15,7 @@
       <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">TicketService</a>
+          <a class="navbar-brand">TicketService</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -29,7 +29,6 @@
         <div class="page-header">
             <h1><?php echo $pageTitle ?></h1>
         </div>
-        <br />
           <?php echo $htmlContent ?>
 
     </div><!-- /.container -->
