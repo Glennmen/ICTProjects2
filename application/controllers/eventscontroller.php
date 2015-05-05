@@ -48,7 +48,14 @@ class EventsController extends CI_Controller {
         if(isset($_POST['allEvents']))
         {
             $data['htmlContent'] = $this->EventsModel->getAllEvents();
-        }     
+        }    
+        for($iCount = 0; $iCount < 101; $iCount++)
+        {
+            if(isset($_POST['description['+ $iCount + ']']))
+            {
+                $data['htmlContent'] = $this->EventsModel->getDataSelectedEvent($iCount);
+            }
+        }
         $this->load->view('view', $data);
     }
 }

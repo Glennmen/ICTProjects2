@@ -21,15 +21,14 @@ class EventsClass {
          $ci =& get_instance();
          try
          {
-         $sEventsList = "<table border='1'><th><td>Event name</td><td>Organizer</td><td>Start date</td>"
-                 . "<td>End date</td><td>Start time</td><td>End time</td><td>Available tickets</td>"
-                 . "<td>Location</td><td>Description</td></th>";
-         $ci->load->database('databaseprojects');
+         $sEventsList = "<table border='1'><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
+                 . "<th>End date</th><th>Description</th></tr>";
+         $ci->load->database('');
          $sQuery = "SELECT * FROM eventsdatabase";
          $sData = $ci->db->query($sQuery);
          foreach($sData->result_array() as $sRow)
          {
-             $sEventsList .= "<tr><td></td><td>";
+             $sEventsList .= "<tr><td>";
              $sEventsList .= $sRow['EventName'];
              $sEventsList .= "</td><td>";
              $sEventsList .= $sRow['EventOrganizer'];
@@ -38,17 +37,7 @@ class EventsClass {
              $sEventsList .= "</td><td>";
              $sEventsList .= $sRow['EndDate'];
              $sEventsList .= "</td><td>";
-             $sEventsList .= $sRow['StartTime'];
-             $sEventsList .= "</td><td>";
-             $sEventsList .= $sRow['EndTime'];
-             $sEventsList .= "</td><td>";
-             $sEventsList .= $sRow['AvailableTickets'];
-             $sEventsList .= "</td><td>";
-             $sEventsList .= $sRow['Location'];
-             $sEventsList .= "</td><td>";
-             $sEventsList .= $sRow['Description'];
-             $sEventsList .="</td><td>";
-             $sEventsList .= "<input type='submit' name='delete' value='Delete'";
+             $sEventsList .= "<input type='submit' name='description' value='View description' />" ;
              $sEventsList .= "</td></tr>";
          }
          $sEventsList .= "</table>";
@@ -61,18 +50,20 @@ class EventsClass {
          
      }
      
-     public function getDataSelectedEvent()
+     public function getDataSelectedEvent($iCount)
      {
-         
-     }
-     
-     public function saveChanges()
-     {
+         $sEventId = $iCount;
          $ci =& get_instance();
          try
          {
-             $ci->load->database('databaseprojects');
-             $sQuery = "UPDATE";
+             $sHtmlEventList = "<table border='1'>";
+             $ci->load->database('');
+             $sQuery = "SELECT * FROM eventsdatabase WHERE EventID = " + $sEventId;
+             $sData = $ci->db->query($sQuery);
+             $sHtmlEventList .= "<tr>"
+                     . "<td>" + $sData['EventName'] + "</td>"
+                     . "</tr>";
+             return $sHtmlEventList;
          } 
          catch (Exception $oError) 
          {
@@ -80,9 +71,18 @@ class EventsClass {
          }
      }
      
-     public function getDescription()
+     public function saveChanges()
      {
-         
+         $ci =& get_instance();
+         try
+         {
+             $ci->load->database('');
+             $sQuery = "UPDATE";
+         } 
+         catch (Exception $oError) 
+         {
+             echo $oError->getMessage();
+         }
      }
      
      public function deleteEvent()
@@ -103,7 +103,7 @@ class EventsClass {
          try
          {
          $ci =& get_instance();
-         $ci->load->database('databaseprojects');
+         $ci->load->database('');
          $this->sEventName = $aEventsData['EventName'];
          $this->sEventOrganizer = $aEventsData['EventOrganizer'];
          $this->sStartDate = $aEventsData['StartDate'];
