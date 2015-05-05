@@ -2,4 +2,7 @@ body {
   padding-top: 50px;
 }
 
+li > .btn-default {
+    margin-top: 3px;
+}
 
