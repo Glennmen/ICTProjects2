@@ -41,10 +41,10 @@ class EventsModel extends CI_Model {
         return $sEventsList;
     }
     
-    public function getDataSelectedEventModel($iCount)
+    public function getDataSelectedEventModel($iEventID)
     {
         $this->load->library('eventsclass');
-        $sEvent = $this->eventsclass->getDataSelectedEvent($iCount);
+        $sEvent = $this->eventsclass->getDataSelectedEvent($iEventID);
         return $sEvent;
     }
     

@@ -27,9 +27,9 @@ class EventsClass {
          $ci->load->database('');
          $sQuery = "SELECT * FROM eventsdatabase";
          $sData = $ci->db->query($sQuery);
+         $sEventsList .= form_open('eventscontroller/');
          foreach($sData->result_array() as $sRow)
          {
-             $sEventsList .= form_open('eventscontroller/');
              $sEventsList .= "<tr><td>";
              $sEventsList .= $sRow['EventName'];
              $sEventsList .= "</td><td>";
@@ -39,35 +39,48 @@ class EventsClass {
              $sEventsList .= "</td><td>";
              $sEventsList .= $sRow['EndDate'];
              $sEventsList .= "</td><td>";
-             $sEventsList .= "<input type='submit' name='";
-             $sEventsList .= $sRow['EventID'];
-             $sEventsList .= "' value='View description' />";
+             $sEventsList .= "<button name='button' value='".$sRow['EventID']."'>View description</button>";
              $sEventsList .= "</td></tr>";
-             $sEventsList .= form_close();
          }
+         $sEventsList .= form_close();
          $sEventsList .= "</table>";
          return $sEventsList;
          } 
          catch (Exception $oError) 
          {
             echo $oError->getMessage();
-         }
-         
+         }     
      }
      
-     public function getDataSelectedEvent($iCount)
+     public function getDataSelectedEvent($iEventID)
      {
-         $sEventId = $iCount;
          $ci =& get_instance();
          try
          {
-             $sHtmlEventList = "<table border='1'>";
+             $sHtmlEventList = "<table border='1'><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
+                 . "<th>End date</th><th>Description</th></tr>";
              $ci->load->database('');
-             $sQuery = "SELECT * FROM eventsdatabase WHERE EventID = " + $sEventId;
+             $sQuery = "SELECT * FROM eventsdatabase WHERE EventID =";
+             $sQuery .= $iEventID;
              $sData = $ci->db->query($sQuery);
-             $sHtmlEventList .= "<tr>"
-                     . "<td>" + $sData['EventName'] + "</td>"
-                     . "</tr>";
+             foreach($sData->result_array() as $sRow)
+             {
+             $sHtmlEventList .= "<tr><td>";
+             $sHtmlEventList .= $sRow['EventName'];
+             $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= $sRow['EventOrganizer'];
+             $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= $sRow['StartDate'];
+             $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= $sRow['EndDate'];
+             $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= $sRow['StartTime'];
+             $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= "</td></tr>";
+//                     . "<td>" + $sRow['EventName'] + "</td>"
+//                     . "</tr>";
+             }
+             $sHtmlEventList .= "</table>";
              return $sHtmlEventList;
          } 
          catch (Exception $oError) 
