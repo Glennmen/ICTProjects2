@@ -14,8 +14,10 @@ class Login extends CI_Controller {
           //This method will have the credentials validation
           $this->load->library('form_validation');
           $this->load->model('LoginModel');
+          $this->load->model('NavigationModel');
 
           $data['pageTitle'] = 'Aanmelden';
+          $data['Menu'] = $this->NavigationModel->Menu();
           $data['htmlContent'] = $this->LoginModel->getLoginForm(); 
           
           $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
