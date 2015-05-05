@@ -17,8 +17,9 @@ class EventsClass {
      public $sDescription;
      
      public function getAllEventsData()
-     {      
+     {   
          $ci =& get_instance();
+         $ci->load->helper('form');
          try
          {
          $sEventsList = "<table border='1'><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
@@ -28,6 +29,7 @@ class EventsClass {
          $sData = $ci->db->query($sQuery);
          foreach($sData->result_array() as $sRow)
          {
+             $sEventsList .= form_open($sRow['EventID']);
              $sEventsList .= "<tr><td>";
              $sEventsList .= $sRow['EventName'];
              $sEventsList .= "</td><td>";
@@ -39,6 +41,7 @@ class EventsClass {
              $sEventsList .= "</td><td>";
              $sEventsList .= "<input type='submit' name='description' value='View description' />" ;
              $sEventsList .= "</td></tr>";
+             $sEventsList .= form_close();
          }
          $sEventsList .= "</table>";
          return $sEventsList;
