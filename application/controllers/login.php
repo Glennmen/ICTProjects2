@@ -16,7 +16,7 @@ class Login extends CI_Controller {
           $this->load->model('LoginModel');
           $this->load->model('NavigationModel');
 
-          $data['pageTitle'] = 'Aanmelden';
+          $data['pageTitle'] = 'Login';
           $data['Menu'] = $this->NavigationModel->Menu();
           $data['htmlContent'] = $this->LoginModel->getLoginForm(); 
           

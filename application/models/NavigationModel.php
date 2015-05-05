@@ -16,13 +16,13 @@ class NavigationModel extends CI_Model{
         {
             $sMenu = "<li><a href='/ICTProjects2/trunk/index.php/home' title='home'>Home</a></li>";
             $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/eventscontroller' title='events'>Events</a></li>";
-            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/login/logout' title='logout'>Afmelden</a></li>";
+            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/login/logout' title='logout'>Logout</a></li>";
         }
         else
         {
             $sMenu = "<li><a href='/ICTProjects2/trunk/index.php/home' title='home'>Home</a></li>";
             $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/eventscontroller' title='events'>Events</a></li>";
-            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/login' title='login'>Aanmelden</a></li>";
+            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/login' title='login'>Login</a></li>";
         }
         
         return $sMenu;

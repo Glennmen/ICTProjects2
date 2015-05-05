@@ -54,7 +54,7 @@ class LoginModel extends CI_Model {
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">';
-            $htmlContent .=  form_submit($submit, "Aanmelden");
+            $htmlContent .=  form_submit($submit, "Login");
             $htmlContent .= 
                 '</div>
             </div>';
