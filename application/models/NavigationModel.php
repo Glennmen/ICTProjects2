@@ -23,6 +23,7 @@ class NavigationModel extends CI_Model{
             $sMenu = "<li><a href='/ICTProjects2/trunk/index.php/home' title='home'>Home</a></li>";
             $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/eventscontroller' title='events'>Events</a></li>";
             $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/login' title='login'>Login</a></li>";
+            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/registrationcontroller' title='Register'>Register</a></li>";
         }
         
         return $sMenu;
