@@ -29,7 +29,7 @@ class EventsClass {
          $sData = $ci->db->query($sQuery);
          foreach($sData->result_array() as $sRow)
          {
-             $sEventsList .= form_open($sRow['EventID']);
+             $sEventsList .= form_open('eventscontroller/');
              $sEventsList .= "<tr><td>";
              $sEventsList .= $sRow['EventName'];
              $sEventsList .= "</td><td>";
@@ -39,7 +39,9 @@ class EventsClass {
              $sEventsList .= "</td><td>";
              $sEventsList .= $sRow['EndDate'];
              $sEventsList .= "</td><td>";
-             $sEventsList .= "<input type='submit' name='description' value='View description' />" ;
+             $sEventsList .= "<input type='submit' name='";
+             $sEventsList .= $sRow['EventID'];
+             $sEventsList .= "' value='View description' />";
              $sEventsList .= "</td></tr>";
              $sEventsList .= form_close();
          }
