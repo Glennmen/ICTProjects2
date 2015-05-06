@@ -15,6 +15,8 @@ class EventsClass {
      public $sEndTime;
      public $iAvailableTickets;
      public $sDescription;
+     public $sLocation;
+     public $iEventID;
      
      public function getAllEventsData()
      {   
@@ -58,11 +60,12 @@ class EventsClass {
          try
          {
              $sHtmlEventList = "<table border='1'><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
-                 . "<th>End date</th><th>Description</th></tr>";
+                 . "<th>End date</th><th>Start time</th><th>End time</th>"
+                     . "<th>Availabla tickets</th><th>Location</th><th>Description</th></tr>";
              $ci->load->database('');
-             $sQuery = "SELECT * FROM eventsdatabase WHERE EventID =";
-             $sQuery .= $iEventID;
+             $sQuery = "SELECT * FROM eventsdatabase WHERE EventID = ".$iEventID;
              $sData = $ci->db->query($sQuery);
+             $sHtmlEventList .= form_open('eventscontroller/');
              foreach($sData->result_array() as $sRow)
              {
              $sHtmlEventList .= "<tr><td>";
@@ -76,11 +79,24 @@ class EventsClass {
              $sHtmlEventList .= "</td><td>";
              $sHtmlEventList .= $sRow['StartTime'];
              $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= $sRow['EndTime'];
+             $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= $sRow['AvailableTickets'];
+             $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= $sRow['Location'];
+             $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= $sRow['Description'];
+             $sHtmlEventList .= "</td><td>";
+             $sHtmlEventList .= "<button name='changeForm' value='".$sRow['EventID']."'>Change data</button>";
+             $sHtmlEventList .= "<button name='deleteForm' value='".$sRow['EventID']."'>Delete event</button>";
              $sHtmlEventList .= "</td></tr>";
 //                     . "<td>" + $sRow['EventName'] + "</td>"
 //                     . "</tr>";
              }
              $sHtmlEventList .= "</table>";
+             $sHtmlEventList .= "<br /><input type='submit' name='backToEvents' value='Eventslist' />";
+             $sHtmlEventList .= form_close();
+             
              return $sHtmlEventList;
          } 
          catch (Exception $oError) 
@@ -89,13 +105,28 @@ class EventsClass {
          }
      }
      
-     public function saveChanges()
+     public function saveChanges($iEventID, $aEventsData)
      {
          $ci =& get_instance();
          try
          {
+             $this->sEventName = $aEventsData['EventName'];
+             $this->sEventOrganizer = $aEventsData['EventOrganizer'];
+             $this->sStartDate = $aEventsData['StartDate'];
+             $this->sEndDate = $aEventsData['EndDate'];
+             $this->sStartTime = $aEventsData['StartTime'];
+             $this->sEndTime = $aEventsData['EndTime'];
+             $this->iAvailableTickets = $aEventsData['AvailableTickets'];
+             $this->sLocation = $aEventsData['Location'];
+             $this->sDescription = $aEventsData['Description'];
              $ci->load->database('');
-             $sQuery = "UPDATE";
+             $sQuery = "UPDATE eventsdatabase SET EventName = '$this->sEventName', "
+                     . "EventOrganizer = '$this->sEventOrganizer', StartDate = '$this->sStartDate', "
+                     . "EndDate = '$this->sEndDate', StartTime = '$this->sStartTime', "
+                     . "EndTime = '$this->sEndTime', AvailableTickets = '$this->iAvailableTickets', "
+                     . "Location = '$this->sLocation', Description = '$this->sDescription' "
+                     . "WHERE EventID = '$iEventID'";
+             $ci->db->query($sQuery);  
          } 
          catch (Exception $oError) 
          {
@@ -103,12 +134,22 @@ class EventsClass {
          }
      }
      
-     public function deleteEvent()
+     public function deleteEvent($iEventID)
      {
-         $ci =& get_instance();
          try
          {
-             
+             $ci =& get_instance();
+             $ci->load->helper('form');
+             $ci->load->database('');
+             $this->iEventID = $iEventID;
+             $sQuery = "DELETE FROM eventsdatabase WHERE EventID = '$this->iEventID'";
+             $ci->db->query($sQuery);
+             $sResult = form_open();
+             $sResult .= "Het event is verwijderd"
+                     . "<br />"
+                     . "<input type='submit' name='backToAllEvents' value='Eventslist' />";
+             $sResult .= form_close();
+             return $sResult;
          } 
          catch (Exception $oError) 
          {
