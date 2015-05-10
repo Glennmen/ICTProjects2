@@ -62,26 +62,47 @@ class EventsModel extends CI_Model {
         
         try 
         {
+            $form = array(
+              'class'       => 'form-horizontal'  
+            );
+            
             $ci->load->database('');
              $sQuery = "SELECT * FROM eventsdatabase WHERE EventID =";
              $sQuery .= $iEventID;
              $sData = $ci->db->query($sQuery);
-             $htmlChangeForm = form_open();
+             $htmlChangeForm = form_open('', $form);
              foreach($sData->result_array() as $sRow)
              {
-                $htmlChangeForm .= "<table>"
-                    ."<tr><td>Event name: </td><td><input type='text' name='eventname' value='".$sRow['EventName']."' /></td></tr>"
-                    ."<tr><td>Event organizer: </td><td><input type='text' name='eventorganizer' value='".$sRow['EventOrganizer']."' /></td></tr>"
-                    ."<tr><td>Start date: </td><td><input type='text' name='startdate' value='".$sRow['StartDate']."' /></td></tr>"
-                    ."<tr><td>End date: </td><td><input type='text' name='enddate' value='".$sRow['EndDate']."' /></td></tr>"
-                    ."<tr><td>Start time: </td><td><input type='text' name='starttime' value='".$sRow['StartTime']."' /></td></tr>"
-                    ."<tr><td>End time: </td><td><input type='text' name='endtime' value='".$sRow['EndTime']."' /></td></tr>"
-                    ."<tr><td>Available tickets: </td><td><input type='text' name='availabletickets' value='".$sRow['AvailableTickets']."' /></td></tr>"
-                    ."<tr><td>Location: </td><td><input type='text' name='location' value='".$sRow['Location']."' /></td></tr>"
-                    ."<tr><td>Description: </td><td><textarea name='description' placeholder='".$sRow['Description']."' rows='4' cols='40' ></textarea></td></tr>"
-                    ."<tr><td colspan='2'><button name='change' value='".$sRow['EventID']."'>Change</button><input type='submit' name='clear' value='Clear' />"
-                    . "<input type='submit' name='annuleren' value='Cancel' /></td></tr>"
-                    . "</table>";
+                $htmlChangeForm .= "<div class='form-group'>
+                    <label for='eventname' class='col-sm-2 control-label'>Event name:</label>
+                    <div class='col-sm-10'><input type='text' name='eventname' class='form-control' value='".$sRow['EventName']."' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='eventorganizer' class='col-sm-2 control-label'>Event organizer:</label>
+                    <div class='col-sm-10'><input type='text' name='eventorganizer' class='form-control' value='".$sRow['EventOrganizer']."' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='startdate' class='col-sm-2 control-label'>Start date:</label>
+                    <div class='col-sm-10'><input type='text' name='startdate' class='form-control' value='".$sRow['StartDate']."' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='enddate' class='col-sm-2 control-label'>End date:</label>
+                    <div class='col-sm-10'><input type='text' name='enddate' class='form-control' value='".$sRow['EndDate']."' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='starttime' class='col-sm-2 control-label'>Start time:</label>
+                    <div class='col-sm-10'><input type='text' name='starttime' class='form-control' value='".$sRow['StartTime']."' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='endtime' class='col-sm-2 control-label'>End time:</label>
+                    <div class='col-sm-10'><input type='text' name='endtime' class='form-control' value='".$sRow['EndTime']."' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
+                    <div class='col-sm-10'><input type='text' name='availabletickets' class='form-control' value='".$sRow['AvailableTickets']."' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='location' class='col-sm-2 control-label'>Location:</label>
+                    <div class='col-sm-10'><input type='text' name='location' class='form-control' value='".$sRow['Location']."' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='description' class='col-sm-2 control-label'>Description:</label>
+                    <div class='col-sm-10'><textarea name='description' class='form-control' placeholder='".$sRow['Description']."' rows='4' cols='40' ></textarea></div></div>"
+                    ."<div class='form-group'>
+                    <div class='col-sm-offset-2 col-sm-10'><button name='change' class='btn btn-default' value='".$sRow['EventID']."'>Change</button><input type='submit' name='clear' class='btn btn-default' value='Clear' />"
+                    . "<input type='submit' name='annuleren' class='btn btn-default' value='Cancel' /></div></div>";
              }
         $htmlChangeForm .= form_close();
         
@@ -105,39 +126,48 @@ class EventsModel extends CI_Model {
         $ci =& get_instance();
          try
          {
-             $sHtmlEventList = "<table border='1'><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
-                 . "<th>End date</th><th>Start time</th><th>End time</th>"
-                     . "<th>Availabla tickets</th><th>Location</th><th>Description</th></tr>";
+            $form = array(
+              'class'       => 'form-horizontal'  
+            );
+             
+             $sHtmlEventList = form_open('', $form);
              $ci->load->database('');
              $sQuery = "SELECT * FROM eventsdatabase WHERE EventID = ".$iEventID;
              $sData = $ci->db->query($sQuery);
-             $sHtmlEventList .= form_open('eventscontroller/');
              foreach($sData->result_array() as $sRow)
              {
-             $sHtmlEventList .= "<tr><td>";
-             $sHtmlEventList .= $sRow['EventName'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['EventOrganizer'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['StartDate'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['EndDate'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['StartTime'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['EndTime'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['AvailableTickets'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['Location'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['Description'];
-             $sHtmlEventList .= "</td></tr>";
+             $sHtmlEventList .= "<div class='form-group'>
+                    <label for='eventname' class='col-sm-2 control-label'>Event name:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['EventName']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='eventorganizer' class='col-sm-2 control-label'>Event organizer:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['EventOrganizer']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='startdate' class='col-sm-2 control-label'>Start date:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['StartDate']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='enddate' class='col-sm-2 control-label'>End date:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['EndDate']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='starttime' class='col-sm-2 control-label'>Start time:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['StartTime']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='endtime' class='col-sm-2 control-label'>End time:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['EndTime']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['AvailableTickets']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='location' class='col-sm-2 control-label'>Location:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['Location']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='description' class='col-sm-2 control-label'>Description:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['Description']."</p></div></div>";
              }
-             $sHtmlEventList .= "</table>";
-             $sHtmlEventList .= "<br /> Weet u zeker dat u ".$sRow['EventName']." wilt verwijderen?"
-                     . "<br /> <button name='delete' value='".$sRow['EventID']."'>Delete event</button>"
-                     . "<button name='cancelDelete' value='".$sRow['EventID']."'>Cancel</button>";
+             $sHtmlEventList .= "<div class='form-group'><div class='col-sm-offset-2 col-sm-10'><p class='form-control-static'>Weet u zeker dat u ".$sRow['EventName']." wilt verwijderen?</p></div></div>"
+                     . "<div class='form-group'>
+                    <div class='col-sm-offset-2 col-sm-10'><button name='delete' class='btn btn-default' value='".$sRow['EventID']."'>Delete event</button>"
+                     . "<button name='cancelDelete' class='btn btn-default' value='".$sRow['EventID']."'>Cancel</button></div></div>";
              $sHtmlEventList .= form_close();
              return $sHtmlEventList;
          } 
@@ -150,22 +180,42 @@ class EventsModel extends CI_Model {
     public function getEventCreateForm()
     {
         $this->load->helper('form');
+        $form = array(
+              'class'       => 'form-horizontal'  
+            );
         
-        $htmlContent = form_open();
+        $htmlContent = form_open('', $form);
         
-        $htmlContent .= "<table>"
-                ."<tr><td>Event name: </td><td><input type='text' name='eventname' /></td></tr>"
-                ."<tr><td>Event organizer: </td><td><input type='text' name='eventorganizer' /></td></tr>"
-                ."<tr><td>Start date: </td><td><input type='text' name='startdate' /></td></tr>"
-                ."<tr><td>End date: </td><td><input type='text' name='enddate' /></td></tr>"
-                ."<tr><td>Start time: </td><td><input type='text' name='starttime' /></td></tr>"
-                ."<tr><td>End time: </td><td><input type='text' name='endtime' /></td></tr>"
-                ."<tr><td>Available tickets: </td><td><input type='text' name='availabletickets' /></td></tr>"
-                ."<tr><td>Location: </td><td><input type='text' name='location' /></td></tr>"
-                ."<tr><td>Description: </td><td><textarea name='description' rows='4' cols='40' ></textarea></td></tr>"
-                ."<tr><td colspan='2'><input type='submit' name='toevoegen' value='Add' /><input type='submit' name='clear' value='Clear' />"
-                . "<input type='submit' name='annuleren' value='Cancel' /></td></tr>"
-                . "</table>";
+        $htmlContent .= "<div class='form-group'>
+                    <label for='eventname' class='col-sm-2 control-label'>Event name:</label>
+                    <div class='col-sm-10'><input type='text' name='eventname' class='form-control' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='eventorganizer' class='col-sm-2 control-label'>Event organizer:</label>
+                    <div class='col-sm-10'><input type='text' name='eventorganizer' class='form-control' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='startdate' class='col-sm-2 control-label'>Start date:</label>
+                    <div class='col-sm-10'><input type='text' name='startdate' class='form-control' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='enddate' class='col-sm-2 control-label'>End date:</label>
+                    <div class='col-sm-10'><input type='text' name='enddate' class='form-control' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='starttime' class='col-sm-2 control-label'>Start time:</label>
+                    <div class='col-sm-10'><input type='text' name='starttime' class='form-control' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='endtime' class='col-sm-2 control-label'>End time:</label>
+                    <div class='col-sm-10'><input type='text' name='endtime' class='form-control' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
+                    <div class='col-sm-10'><input type='text' name='availabletickets' class='form-control' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='location' class='col-sm-2 control-label'>Location:</label>
+                    <div class='col-sm-10'><input type='text' name='location' class='form-control' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='description' class='col-sm-2 control-label'>Description:</label>
+                    <div class='col-sm-10'><textarea name='description' class='form-control' rows='4' cols='40' ></textarea></div></div>"
+                    ."<div class='form-group'>
+                    <div class='col-sm-offset-2 col-sm-10'><input type='submit' name='toevoegen' class='btn btn-default' value='Add' /><input type='submit' name='clear' class='btn btn-default' value='Clear' />"
+                    . "<input type='submit' name='annuleren' class='btn btn-default' value='Cancel' /></div></div>";
         
         $htmlContent .= form_close();
         

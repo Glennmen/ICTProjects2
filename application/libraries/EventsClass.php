@@ -24,12 +24,12 @@ class EventsClass {
          $ci->load->helper('form');
          try
          {
-         $sEventsList = "<table border='1'><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
-                 . "<th>End date</th><th>Description</th></tr>";
+         $sEventsList = form_open();
+         $sEventsList .= "<table class='table table-hover table-bordered'><thead><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
+                 . "<th>End date</th><th>Description</th></tr></thead><tbody>";
          $ci->load->database('');
          $sQuery = "SELECT * FROM eventsdatabase";
          $sData = $ci->db->query($sQuery);
-         $sEventsList .= form_open('eventscontroller/');
          foreach($sData->result_array() as $sRow)
          {
              $sEventsList .= "<tr><td>";
@@ -41,11 +41,11 @@ class EventsClass {
              $sEventsList .= "</td><td>";
              $sEventsList .= $sRow['EndDate'];
              $sEventsList .= "</td><td>";
-             $sEventsList .= "<button name='button' value='".$sRow['EventID']."'>View description</button>";
+             $sEventsList .= "<button name='button' class='btn btn-default' value='".$sRow['EventID']."'>View description</button>";
              $sEventsList .= "</td></tr>";
          }
+         $sEventsList .= "</tbody></table>";
          $sEventsList .= form_close();
-         $sEventsList .= "</table>";
          return $sEventsList;
          } 
          catch (Exception $oError) 
@@ -59,42 +59,49 @@ class EventsClass {
          $ci =& get_instance();
          try
          {
-             $sHtmlEventList = "<table border='1'><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
-                 . "<th>End date</th><th>Start time</th><th>End time</th>"
-                     . "<th>Availabla tickets</th><th>Location</th><th>Description</th></tr>";
+             $form = array(
+              'class'       => 'form-horizontal'  
+            );
+             
+             $sHtmlEventList = form_open('', $form);
              $ci->load->database('');
              $sQuery = "SELECT * FROM eventsdatabase WHERE EventID = ".$iEventID;
              $sData = $ci->db->query($sQuery);
-             $sHtmlEventList .= form_open('eventscontroller/');
              foreach($sData->result_array() as $sRow)
              {
-             $sHtmlEventList .= "<tr><td>";
-             $sHtmlEventList .= $sRow['EventName'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['EventOrganizer'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['StartDate'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['EndDate'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['StartTime'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['EndTime'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['AvailableTickets'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['Location'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= $sRow['Description'];
-             $sHtmlEventList .= "</td><td>";
-             $sHtmlEventList .= "<button name='changeForm' value='".$sRow['EventID']."'>Change data</button>";
-             $sHtmlEventList .= "<button name='deleteForm' value='".$sRow['EventID']."'>Delete event</button>";
-             $sHtmlEventList .= "</td></tr>";
-//                     . "<td>" + $sRow['EventName'] + "</td>"
-//                     . "</tr>";
+             $sHtmlEventList .= "<div class='form-group'>
+                    <label for='eventname' class='col-sm-2 control-label'>Event name:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['EventName']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='eventorganizer' class='col-sm-2 control-label'>Event organizer:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['EventOrganizer']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='startdate' class='col-sm-2 control-label'>Start date:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['StartDate']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='enddate' class='col-sm-2 control-label'>End date:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['EndDate']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='starttime' class='col-sm-2 control-label'>Start time:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['StartTime']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='endtime' class='col-sm-2 control-label'>End time:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['EndTime']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['AvailableTickets']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='location' class='col-sm-2 control-label'>Location:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['Location']."</p></div></div>"
+                    ."<div class='form-group'>
+                    <label for='description' class='col-sm-2 control-label'>Description:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['Description']."</p></div></div>";
+             $sHtmlEventList .= "<div class='form-group'>
+                    <div class='col-sm-offset-2 col-sm-10'><button name='changeForm' class='btn btn-default' value='".$sRow['EventID']."'>Change data</button>";
+             $sHtmlEventList .= "<button name='deleteForm' class='btn btn-default' value='".$sRow['EventID']."'>Delete event</button></div></div>";
              }
-             $sHtmlEventList .= "</table>";
-             $sHtmlEventList .= "<br /><input type='submit' name='backToEvents' value='Eventslist' />";
+             $sHtmlEventList .= "<div class='form-group'>
+                    <div class='col-sm-offset-2 col-sm-10'><input type='submit' name='backToEvents' class='btn btn-default' value='Eventslist' /></div></div>";
              $sHtmlEventList .= form_close();
              
              return $sHtmlEventList;
@@ -145,9 +152,8 @@ class EventsClass {
              $sQuery = "DELETE FROM eventsdatabase WHERE EventID = '$this->iEventID'";
              $ci->db->query($sQuery);
              $sResult = form_open();
-             $sResult .= "Het event is verwijderd"
-                     . "<br />"
-                     . "<input type='submit' name='backToAllEvents' value='Eventslist' />";
+             $sResult .= "<p>Het event is verwijderd</p>"
+                     . "<input type='submit' name='backToAllEvents' class='btn btn-default' value='Eventslist' />";
              $sResult .= form_close();
              return $sResult;
          } 
