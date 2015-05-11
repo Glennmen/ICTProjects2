@@ -17,6 +17,7 @@ class EventsClass {
      public $sDescription;
      public $sLocation;
      public $iEventID;
+     public $iOrganizerID;
      
      public function getAllEventsData()
      {   
@@ -44,6 +45,7 @@ class EventsClass {
              $sEventsList .= "<button name='button' class='btn btn-default' value='".$sRow['EventID']."'>View description</button>";
              $sEventsList .= "</td></tr>";
          }
+         $sEventsList .= "<input type='submit' name='myEvents' class='btn btn-default' value='Show my events' />";
          $sEventsList .= "</tbody></table>";
          $sEventsList .= form_close();
          return $sEventsList;
@@ -178,13 +180,53 @@ class EventsClass {
          $this->iAvailableTickets = $aEventsData['AvailableTickets'];
          $this->sLocation = $aEventsData['Location'];
          $this->sDescription = $aEventsData['Description'];
-         $sQuery = "INSERT INTO eventsdatabase (EventName,EventOrganizer,StartDate,EndDate,StartTime,EndTime,AvailableTickets,Location,Description)"
-                 . "VALUES ('$this->sEventName','$this->sEventOrganizer','$this->sStartDate','$this->sEndDate','$this->sStartTime','$this->sEndTime','$this->iAvailableTickets','$this->sLocation','$this->sDescription')";
+         $aUserData = $ci->session->userdata('logged_in');
+         $this->iOrganizerID = $aUserData['id'];
+         $sQuery = "INSERT INTO eventsdatabase (EventName,EventOrganizer,OrganizerID,StartDate,EndDate,StartTime,EndTime,AvailableTickets,Location,Description)"
+                 . "VALUES ('$this->sEventName','$this->sEventOrganizer','$this->iOrganizerID','$this->sStartDate','$this->sEndDate','$this->sStartTime','$this->sEndTime','$this->iAvailableTickets','$this->sLocation','$this->sDescription')";
          $ci->db->query($sQuery);
          }
          catch(PDOException $oError)
          {
              echo $oError->getMessage();
          }
+     }
+     
+     public function getMyEvents()
+     {
+         $ci =& get_instance();
+         $ci->load->helper('form');
+         try
+         {
+         $aUserData = $ci->session->userdata('logged_in');
+         $this->iOrganizerID = $aUserData['id'];
+         $sEventsList = form_open();
+         $sEventsList .= "<table class='table table-hover table-bordered'><thead><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
+                 . "<th>End date</th><th>Description</th></tr></thead><tbody>";
+         $ci->load->database('');
+         $sQuery = "SELECT * FROM eventsdatabase WHERE OrganizerID = '$this->iOrganizerID'";
+         $sData = $ci->db->query($sQuery);
+         foreach($sData->result_array() as $sRow)
+         {
+             $sEventsList .= "<tr><td>";
+             $sEventsList .= $sRow['EventName'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['EventOrganizer'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['StartDate'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= $sRow['EndDate'];
+             $sEventsList .= "</td><td>";
+             $sEventsList .= "<button name='button' class='btn btn-default' value='".$sRow['EventID']."'>View description</button>";
+             $sEventsList .= "</td></tr>";
+         }
+         $sEventsList .= "</tbody></table>";
+         $sEventsList .= form_close();
+         return $sEventsList;
+         } 
+         catch (Exception $oError) 
+         {
+            echo $oError->getMessage();
+         }     
      }
 }

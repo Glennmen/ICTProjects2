@@ -227,4 +227,11 @@ class EventsModel extends CI_Model {
         $this->load->library('eventsclass');
         $this->eventsclass->saveNewEventData($aEventsData);
     }
+    
+    public function getMyEventsModel()
+    {
+        $this->load->library('eventsclass');
+        $sMyEvents = $this->eventsclass->getMyEvents();
+        return $sMyEvents;
+    }
 }

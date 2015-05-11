@@ -7,11 +7,9 @@
  */
 
 class EventsController extends CI_Controller {
-    //session_start() => eerste commando van de pagina
+
     public function index() 
     {
-        //session_start() => eerste commando van de pagina in het index.php bestand
-        //redbeans
         $this->load->model('EventsModel');
         $this->load->model('NavigationModel');
         $data['pageTitle'] = $this->EventsModel->getPageTitle();
@@ -73,7 +71,8 @@ class EventsController extends CI_Controller {
                 'Location' => $_POST['location'],
                 'Description' => $_POST['description']
             );
-            $data['htmlContent'] = $this->EventsModel->saveChangesModel($iEventID, $aEventsData);
+            $this->EventsModel->saveChangesModel($iEventID, $aEventsData);
+            $data['htmlContent'] = $this->EventsModel->eventsHomePage();
         }
         if(isset($_POST['deleteForm']))
         {
@@ -93,6 +92,10 @@ class EventsController extends CI_Controller {
         {
             $iEventID = $_POST['cancelDelete'];
             $data['htmlContent'] = $this->EventsModel->getDataSelectedEventModel($iEventID);        
+        }
+        if(isset($_POST['myEvents']))
+        {
+            $data['htmlContent'] = $this->EventsModel->getMyEventsModel();
         }
         $this->load->view('view', $data);
     }
