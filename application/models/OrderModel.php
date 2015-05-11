@@ -6,6 +6,14 @@
  * and open the template in the editor.
  */
 class OrderModel extends CI_Model{
+    public $name;
+    public $fname;
+    public $adress;
+    public $mail;
+    public $passnumber;
+    public $tickets;
+    public $events;
+    
     
     public function __construct() {
         parent::__construct();
@@ -20,7 +28,7 @@ class OrderModel extends CI_Model{
         
         $htmlContent = form_open();
         
-         $name = array(
+         $this->name = array(
             'name'        => 'customerName',
             'id'          => 'cname',
             'value'       => '',
@@ -29,7 +37,7 @@ class OrderModel extends CI_Model{
             'style'       => 'width:50%',
         );
          
-         $fname = array(
+         $this->fname = array(
             'name'        => 'firstName',
             'id'          => 'fname',
             'value'       => '',
@@ -38,7 +46,7 @@ class OrderModel extends CI_Model{
             'style'       => 'width:50%',
         );
          
-         $adress = array(
+         $this->adress = array(
             'name'        => 'adress',
             'id'          => 'adress',
             'value'       => '',
@@ -47,7 +55,7 @@ class OrderModel extends CI_Model{
             'style'       => 'width:50%',
         );
         
-        $mail = array(
+        $this->mail = array(
             'name'        => 'e-mail',
             'id'          => 'email',
             'value'       => '',
@@ -57,7 +65,7 @@ class OrderModel extends CI_Model{
             'required'    => 'required',
         ); 
          
-         $passnumber = array(
+         $this->passnumber = array(
             'name'        => 'passnumber',
             'id'          => 'pass',
             'value'       => '',
@@ -66,7 +74,7 @@ class OrderModel extends CI_Model{
             'style'       => 'width:50%',
         );
          
-         $tickets = array(
+         $this->tickets = array(
             'name'        => 'ticketAmount',
             'id'          => 'tickets',
             'value'       => '',
@@ -76,24 +84,24 @@ class OrderModel extends CI_Model{
             'required'    => 'required',
         );
          
-         $events = array();
+         $this->events = array();
          $ci->load->database('');
          $query  = "SELECT * FROM eventsdatabase";
          $sData = $ci->db->query($query);
          
              foreach ($sData->result_array() as $sRow)
              {
-                $events[$sRow['EventID']] = $sRow['EventName']; 
+                $this->events[$sRow['EventID']] = $sRow['EventName']; 
              }        
          
              
-         $this->table->add_row("Customer name: ",  form_input($name));
-         $this->table->add_row("First name: ",  form_input($fname));
-         $this->table->add_row("Adress: ",  form_input($adress));
-         $this->table->add_row("E-mail: ",  form_input($mail));
-         $this->table->add_row("Passnumber: ",  form_input($passnumber));
-         $this->table->add_row("Ticketamount: ", form_input($tickets));
-         $this->table->add_row("Event", form_dropdown("Events",$events));
+         $this->table->add_row("Customer name: ",  form_input($this->name));
+         $this->table->add_row("First name: ",  form_input($this->fname));
+         $this->table->add_row("Adress: ",  form_input($this->adress));
+         $this->table->add_row("E-mail: ",  form_input($this->mail));
+         $this->table->add_row("Passnumber: ",  form_input($this->passnumber));
+         $this->table->add_row("Ticketamount: ", form_input($this->tickets));
+         $this->table->add_row("Event", form_dropdown("Events",$this->events));
 
          $this->table->add_row(form_submit('submitOrderbtn','Order'),form_reset('Reset','Reset'));
          
@@ -108,11 +116,14 @@ class OrderModel extends CI_Model{
     
     public function confirmOrder()
     { 
+       
+        $ci =& get_instance();
         $htmlContent = form_open();
         if(isset($_POST['submitOrderbtn']))
         {
             $ci->load->database('');
-            $query=("INSERT INTO orderdatabase VALUES('$name','$fname',$adress,$mail,NOW())"); 
+            $query=("INSERT INTO orderdatabase VALUES('$this->name','$this->fname',$this->adress,$this->mail,$this->passnumber,$this->tickets,,NOW())"); 
+            $ci->db->query($query);
             $htmlContent .= '<h2>Order is succesvol geplaatst</h2>';
         }    
        
