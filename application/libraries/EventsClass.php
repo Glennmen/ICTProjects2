@@ -45,8 +45,8 @@ class EventsClass {
              $sEventsList .= "<button name='button' class='btn btn-default' value='".$sRow['EventID']."'>View description</button>";
              $sEventsList .= "</td></tr>";
          }
-         $sEventsList .= "<input type='submit' name='myEvents' class='btn btn-default' value='Show my events' />";
          $sEventsList .= "</tbody></table>";
+         $sEventsList .= "<input type='submit' name='myEvents' class='btn btn-default' value='Show my events' />";
          $sEventsList .= form_close();
          return $sEventsList;
          } 
