@@ -81,16 +81,16 @@ class EventsModel extends CI_Model {
                     <div class='col-sm-10'><input type='text' name='eventorganizer' class='form-control' value='".$sRow['EventOrganizer']."' /></div></div>"
                     ."<div class='form-group'>
                     <label for='startdate' class='col-sm-2 control-label'>Start date:</label>
-                    <div class='col-sm-10'><input type='text' name='startdate' class='form-control' value='".$sRow['StartDate']."' /></div></div>"
+                    <div class='col-sm-10'><input type='date' name='startdate' class='form-control' value='".$sRow['StartDate']."' /></div></div>"
                     ."<div class='form-group'>
                     <label for='enddate' class='col-sm-2 control-label'>End date:</label>
-                    <div class='col-sm-10'><input type='text' name='enddate' class='form-control' value='".$sRow['EndDate']."' /></div></div>"
+                    <div class='col-sm-10'><input type='date' name='enddate' class='form-control' value='".$sRow['EndDate']."' /></div></div>"
                     ."<div class='form-group'>
                     <label for='starttime' class='col-sm-2 control-label'>Start time:</label>
-                    <div class='col-sm-10'><input type='text' name='starttime' class='form-control' value='".$sRow['StartTime']."' /></div></div>"
+                    <div class='col-sm-10'><input type='time' name='starttime' class='form-control' value='".$sRow['StartTime']."' /></div></div>"
                     ."<div class='form-group'>
                     <label for='endtime' class='col-sm-2 control-label'>End time:</label>
-                    <div class='col-sm-10'><input type='text' name='endtime' class='form-control' value='".$sRow['EndTime']."' /></div></div>"
+                    <div class='col-sm-10'><input type='time' name='endtime' class='form-control' value='".$sRow['EndTime']."' /></div></div>"
                     ."<div class='form-group'>
                     <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
                     <div class='col-sm-10'><input type='text' name='availabletickets' class='form-control' value='".$sRow['AvailableTickets']."' /></div></div>"
@@ -194,16 +194,16 @@ class EventsModel extends CI_Model {
                     <div class='col-sm-10'><input type='text' name='eventorganizer' class='form-control' /></div></div>"
                     ."<div class='form-group'>
                     <label for='startdate' class='col-sm-2 control-label'>Start date:</label>
-                    <div class='col-sm-10'><input type='text' name='startdate' class='form-control' /></div></div>"
+                    <div class='col-sm-10'><input type='date' name='startdate' class='form-control' /></div></div>"
                     ."<div class='form-group'>
                     <label for='enddate' class='col-sm-2 control-label'>End date:</label>
-                    <div class='col-sm-10'><input type='text' name='enddate' class='form-control' /></div></div>"
+                    <div class='col-sm-10'><input type='date' name='enddate' class='form-control' /></div></div>"
                     ."<div class='form-group'>
                     <label for='starttime' class='col-sm-2 control-label'>Start time:</label>
-                    <div class='col-sm-10'><input type='text' name='starttime' class='form-control' /></div></div>"
+                    <div class='col-sm-10'><input type='time' name='starttime' class='form-control' /></div></div>"
                     ."<div class='form-group'>
                     <label for='endtime' class='col-sm-2 control-label'>End time:</label>
-                    <div class='col-sm-10'><input type='text' name='endtime' class='form-control' /></div></div>"
+                    <div class='col-sm-10'><input type='time' name='endtime' class='form-control' /></div></div>"
                     ."<div class='form-group'>
                     <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
                     <div class='col-sm-10'><input type='text' name='availabletickets' class='form-control' /></div></div>"

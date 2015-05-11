@@ -27,8 +27,10 @@ class Login extends CI_Controller {
           {
               if(validation_errors() != "")
               {
+                  $this->load->library('errorreport');
+                  
                 //Field validation failed.  User redirected to login page
-                $error = $this->LoginModel->loginError();
+                $error = $this->errorreport->Error();
                 $form = $this->LoginModel->getLoginForm();
                 $array = array($error, $form);
                 $data['htmlContent'] = join("", $array);
