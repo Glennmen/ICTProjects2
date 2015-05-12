@@ -57,6 +57,7 @@ class EventsController extends CI_Controller {
                   'StartTime' => $_POST['starttime'],
                   'EndTime' => $_POST['endtime'],
                   'AvailableTickets' => $_POST['availabletickets'],
+                  'PrijsPerTicket' => $_POST['prijsperticket'],
                   'Location' => $_POST['location'],
                   'Description' => $_POST['description']
               );
@@ -125,6 +126,7 @@ class EventsController extends CI_Controller {
                     'StartTime' => $_POST['starttime'],
                     'EndTime' => $_POST['endtime'],
                     'AvailableTickets' => $_POST['availabletickets'],
+                    'PrijsPerTicket' => $_POST['prijsperticket'],
                     'Location' => $_POST['location'],
                     'Description' => $_POST['description']
                 );

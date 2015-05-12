@@ -20,6 +20,8 @@ class EventsClass {
      public $iOrganizerID;
      public $iSessionID;
      public $iAccountType;
+     public $dPrijs;
+     
      
      public function getAllEventsData()
      {   
@@ -108,6 +110,9 @@ class EventsClass {
                     ."<div class='form-group'>
                     <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
                     <div class='col-sm-10'><p class='form-control-static'>".$sRow['AvailableTickets']."</p></div></div>"
+                     ."<div class='form-group'>
+                    <label for='prijsperticket' class='col-sm-2 control-label'>Prijs per ticket:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['PrijsPerTicket']."€</p></div></div>"
                     ."<div class='form-group'>
                     <label for='location' class='col-sm-2 control-label'>Location:</label>
                     <div class='col-sm-10'><p class='form-control-static'>".$sRow['Location']."</p></div></div>"
@@ -148,6 +153,7 @@ class EventsClass {
              $this->sStartTime = $aEventsData['StartTime'];
              $this->sEndTime = $aEventsData['EndTime'];
              $this->iAvailableTickets = $aEventsData['AvailableTickets'];
+             $this->dPrijsPrijs = $aEventsData['PrijsPerTicket'];
              $this->sLocation = $aEventsData['Location'];
              $this->sDescription = $aEventsData['Description'];
              $ci->load->database('');
@@ -155,6 +161,7 @@ class EventsClass {
                      . "EventOrganizer = '$this->sEventOrganizer', StartDate = '$this->sStartDate', "
                      . "EndDate = '$this->sEndDate', StartTime = '$this->sStartTime', "
                      . "EndTime = '$this->sEndTime', AvailableTickets = '$this->iAvailableTickets', "
+                     . "PrijsPerTicket = '$this->dPrijs', "
                      . "Location = '$this->sLocation', Description = '$this->sDescription' "
                      . "WHERE EventID = '$iEventID'";
              $ci->db->query($sQuery);  
@@ -200,12 +207,13 @@ class EventsClass {
          $this->sStartTime = $aEventsData['StartTime'];
          $this->sEndTime = $aEventsData['EndTime'];
          $this->iAvailableTickets = $aEventsData['AvailableTickets'];
+         $this->dPrijs = $aEventsData['PrijsPerTicket'];
          $this->sLocation = $aEventsData['Location'];
          $this->sDescription = $aEventsData['Description'];
          $aUserData = $ci->session->userdata('logged_in');
          $this->iOrganizerID = $aUserData['id'];
-         $sQuery = "INSERT INTO eventsdatabase (EventName,EventOrganizer,OrganizerID,StartDate,EndDate,StartTime,EndTime,AvailableTickets,Location,Description)"
-                 . "VALUES ('$this->sEventName','$this->sEventOrganizer','$this->iOrganizerID','$this->sStartDate','$this->sEndDate','$this->sStartTime','$this->sEndTime','$this->iAvailableTickets','$this->sLocation','$this->sDescription')";
+         $sQuery = "INSERT INTO eventsdatabase (EventName,EventOrganizer,OrganizerID,StartDate,EndDate,StartTime,EndTime,AvailableTickets,PrijsPerTicket,Location,Description)"
+                 . "VALUES ('$this->sEventName','$this->sEventOrganizer','$this->iOrganizerID','$this->sStartDate','$this->sEndDate','$this->sStartTime','$this->sEndTime','$this->iAvailableTickets','$this->dPrijs','$this->sLocation','$this->sDescription')";
          $ci->db->query($sQuery);
          }
          catch(PDOException $oError)

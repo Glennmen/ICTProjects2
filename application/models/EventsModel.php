@@ -95,11 +95,14 @@ class EventsModel extends CI_Model {
                     <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
                     <div class='col-sm-10'><input type='text' name='availabletickets' class='form-control' value='".$sRow['AvailableTickets']."' /></div></div>"
                     ."<div class='form-group'>
+                    <label for='prijsperticket' class='col-sm-2 control-label'>Prijs per ticket:</label>
+                    <div class='col-sm-10'><input type='text' name='prijsperticket' class='form-control' value='".$sRow['PrijsPerTicket']."' /></div></div>"
+                    ."<div class='form-group'>
                     <label for='location' class='col-sm-2 control-label'>Location:</label>
                     <div class='col-sm-10'><input type='text' name='location' class='form-control' value='".$sRow['Location']."' /></div></div>"
                     ."<div class='form-group'>
                     <label for='description' class='col-sm-2 control-label'>Description:</label>
-                    <div class='col-sm-10'><textarea name='description' class='form-control' placeholder='".$sRow['Description']."' rows='4' cols='40' ></textarea></div></div>"
+                    <div class='col-sm-10'><textarea name='description' class='form-control' rows='4' cols='40' >".$sRow['Description']."</textarea></div></div>"
                     ."<div class='form-group'>
                     <div class='col-sm-offset-2 col-sm-10'><button name='change' class='btn btn-default' value='".$sRow['EventID']."'>Change</button><input type='submit' name='clear' class='btn btn-default' value='Clear' />"
                     . "<input type='submit' name='annuleren' class='btn btn-default' value='Cancel' /></div></div>";
@@ -158,6 +161,9 @@ class EventsModel extends CI_Model {
                     <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
                     <div class='col-sm-10'><p class='form-control-static'>".$sRow['AvailableTickets']."</p></div></div>"
                     ."<div class='form-group'>
+                    <label for='prijsperticket' class='col-sm-2 control-label'>Prijs per ticket:</label>
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['PrijsPerTicket']."</p></div></div>"
+                    ."<div class='form-group'>
                     <label for='location' class='col-sm-2 control-label'>Location:</label>
                     <div class='col-sm-10'><p class='form-control-static'>".$sRow['Location']."</p></div></div>"
                     ."<div class='form-group'>
@@ -207,6 +213,9 @@ class EventsModel extends CI_Model {
                     ."<div class='form-group'>
                     <label for='availabletickets' class='col-sm-2 control-label'>Available tickets:</label>
                     <div class='col-sm-10'><input type='text' name='availabletickets' class='form-control' /></div></div>"
+                    ."<div class='form-group'>
+                    <label for='prijsperticket' class='col-sm-2 control-label'>Prijs per ticket:</label>
+                    <div class='col-sm-10'><input type='text' name='prijsperticket' class='form-control' /></div></div>"
                     ."<div class='form-group'>
                     <label for='location' class='col-sm-2 control-label'>Location:</label>
                     <div class='col-sm-10'><input type='text' name='location' class='form-control' /></div></div>"
