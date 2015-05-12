@@ -24,9 +24,7 @@
           <a class="navbar-brand">TicketService</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
               <?php echo $Menu ?>
-          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
