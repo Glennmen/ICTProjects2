@@ -61,6 +61,7 @@ class EventsClass {
          $ci =& get_instance();
          try
          {
+             $ci->load->helper('form');
              $form = array(
               'class'       => 'form-horizontal'  
             );
@@ -100,7 +101,8 @@ class EventsClass {
                     <div class='col-sm-10'><p class='form-control-static'>".$sRow['Description']."</p></div></div>";
              $sHtmlEventList .= "<div class='form-group'>
                     <div class='col-sm-offset-2 col-sm-10'><button name='changeForm' class='btn btn-default' value='".$sRow['EventID']."'>Change data</button>";
-             $sHtmlEventList .= "<button name='deleteForm' class='btn btn-default' value='".$sRow['EventID']."'>Delete event</button></div></div>";
+             $sHtmlEventList .= "<button name='deleteForm' class='btn btn-default' value='".$sRow['EventID']."'>Delete event</button>";
+             $sHtmlEventList .= "<button name='orderTickets' class='btn btn-default' value='".$sRow['EventID']."'>Order tickets</button></div></div>";
              }
              $sHtmlEventList .= "<div class='form-group'>
                     <div class='col-sm-offset-2 col-sm-10'><input type='submit' name='backToEvents' class='btn btn-default' value='Eventslist' /></div></div>";

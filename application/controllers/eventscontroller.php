@@ -14,7 +14,7 @@ class EventsController extends CI_Controller {
         $this->load->model('NavigationModel');
         $data['pageTitle'] = $this->EventsModel->getPageTitle();
         $data['Menu'] = $this->NavigationModel->Menu();
-        $data['htmlContent'] = $this->EventsModel->eventsHomePage();
+        $data['htmlContent'] = $this->EventsModel->getAllEvents();
         
         if(isset($_POST['createEvent']))
         {
@@ -70,7 +70,7 @@ class EventsController extends CI_Controller {
         }
         if(isset($_POST['cancel']))
         {
-            $data['htmlContent'] = $this->EventsModel->eventsHomePage();
+            $data['htmlContent'] = $this->EventsModel->getAllEvents();
         }
         if(isset($_POST['allEvents']) || isset($_POST['backToAllEvents']) || isset($_POST['backToEvents']))
         {
