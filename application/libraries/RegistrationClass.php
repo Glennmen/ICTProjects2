@@ -13,9 +13,10 @@ class RegistrationClass {
         $ci =& get_instance();
         $ci->load->database();
         
+        
         $AccountType = $_POST['accounttype'];
         $Username= $_POST['username'];
-        $Password = $_POST['password'];
+        $Password = MD5($_POST['password']);
         $FirstName = $_POST['firstname'];
         $LastName = $_POST['lastname'];
         $RegisterNumber = $_POST['registernumber'];
@@ -24,6 +25,6 @@ class RegistrationClass {
         $CityCode = $_POST['citycode'];
         $City = $_POST['city'];
         $PhoneNumber = $_POST['phonenumber'];
-        $ci->db->query("INSERT INTO users VALUES('$AccountType','$Username','$Password','$FirstName','$LastName','$RegisterNumber','$Email','$Street','$CityCode','$City','$PhoneNumber')");
+        $ci->db->query("INSERT INTO users VALUES(null, '$AccountType','$Username','$Password','$FirstName','$LastName','$RegisterNumber','$Email','$Street','$City','$CityCode','$PhoneNumber')");
     }
 }

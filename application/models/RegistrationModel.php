@@ -18,8 +18,8 @@ class RegistrationModel extends CI_Model {
         $this->load->helper('form');
         
         $AccountType = array(
-              'client'          => 'Client',
-              'eventorganiser'  => 'Event organiser',
+              '3'          => 'Client',
+              '2'  => 'Event organiser',
             );
         
         $AccountTypeClass = 'class = "form-control"';
@@ -172,16 +172,16 @@ class RegistrationModel extends CI_Model {
                 '</div>
             </div>
             <div class="form-group">
-                <label for="citycode" class="col-sm-2 control-label">City code</label>
+                <label for="city" class="col-sm-2 control-label">City</label>
                 <div class="col-sm-10">';
-        $htmlContent .= form_input($CityCode);
+        $htmlContent .= form_input($City);
         $htmlContent .= 
                 '</div>
             </div>
             <div class="form-group">
-                <label for="city" class="col-sm-2 control-label">City</label>
+                <label for="citycode" class="col-sm-2 control-label">City code</label>
                 <div class="col-sm-10">';
-        $htmlContent .= form_input($City);
+        $htmlContent .= form_input($CityCode);
         $htmlContent .= 
                 '</div>
             </div>
