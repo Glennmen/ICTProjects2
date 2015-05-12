@@ -40,6 +40,14 @@ class RegistrationModel extends CI_Model {
               'placeholder' => 'Password',
             );
         
+        $ConfirmPassword = array(
+              'name'        => 'confirmpassword',
+              'id'          => 'confirmpassword',
+              'value'       => '',
+              'class'       => 'form-control',
+              'placeholder' => 'Confirm password',
+            );
+        
         $FirstName = array(
               'name'        => 'firstname',
               'id'          => 'firstname',
@@ -133,6 +141,13 @@ class RegistrationModel extends CI_Model {
                 <label for="password" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-10">';
         $htmlContent .= form_password($Password);
+        $htmlContent .= 
+                '</div>
+            </div>
+            <div class="form-group">
+                <label for="confirmpassword" class="col-sm-2 control-label">Confirm Password</label>
+                <div class="col-sm-10">';
+        $htmlContent .= form_password($ConfirmPassword);
         $htmlContent .= 
                 '</div>
             </div>
