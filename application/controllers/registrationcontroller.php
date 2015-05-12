@@ -10,14 +10,25 @@ class RegistrationController extends CI_Controller {
     
     function __construct() {
         parent::__construct();
-        $this->load->library('RegistrationClass');
+        $this->load->library('registrationclass');
+        $this->load->model('RegistrationModel');
+        $this->load->model('NavigationModel');
     }
     
     function index()
+    {        
+        $data['pageTitle'] = 'Registreren';
+        $data['Menu'] = $this->NavigationModel->Menu();
+        $data['htmlContent'] = $this->RegistrationModel->getRegistrationForm();
+        
+        $this->load->view('view', $data);
+        
+    }
+    
+    function saveInput()
     {
-        $this->load->model('RegistrationModel');
-        $this->load->model('NavigationModel');
-
+        $this->registrationclass->saveData();
+        
         $data['pageTitle'] = 'Registreren';
         $data['Menu'] = $this->NavigationModel->Menu();
         $data['htmlContent'] = $this->RegistrationModel->getRegistrationForm();

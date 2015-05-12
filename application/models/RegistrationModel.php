@@ -104,16 +104,21 @@ class RegistrationModel extends CI_Model {
               'placeholder' => 'Phone number',
             );
         
+        $Register = array(
+                'name'      => 'register',
+                'class'     => 'btn btn-default',
+            );
+        
         $form = array(
               'class'       => 'form-horizontal'  
             );
         
-        $htmlContent = form_open('',$form);
+        $htmlContent = form_open('registrationcontroller/saveInput',$form);
         $htmlContent .= 
             '<div class="form-group">
                 <label for="accounttype" class="col-sm-2 control-label">Account type</label>
                 <div class="col-sm-10">';
-        $htmlContent .= form_dropdown('Account Type', $AccountType, 'client', $AccountTypeClass);
+        $htmlContent .= form_dropdown('accounttype', $AccountType, 'client', $AccountTypeClass);
         $htmlContent .= 
                 '</div>
             </div>
@@ -184,8 +189,15 @@ class RegistrationModel extends CI_Model {
                 <label for="phonenumber" class="col-sm-2 control-label">Phone number</label>
                 <div class="col-sm-10">';
         $htmlContent .= form_input($PhoneNumber);
-        $htmlContent .= '</div>
-                </div>';
+        $htmlContent .= 
+                '</div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">';
+            $htmlContent .=  form_submit($Register, "Register");
+            $htmlContent .= 
+                '</div>
+            </div>';
         
         $htmlContent .= form_close();
         

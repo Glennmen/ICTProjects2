@@ -7,25 +7,23 @@
  */
 
 class RegistrationClass {
-    public $sAccountType;
-    public $sUsername;
-    public $sPassword;
-    public $sFirstName;
-    public $sLastName;
-    public $iRegisterNumber;
-    public $sEmail;
-    public $sStreet;
-    public $iCityCode;
-    public $sCity;
-    public $iPhoneNumber;
     
-    public function checkCorrectData()
+    function saveData()
     {
+        $ci =& get_instance();
+        $ci->load->database();
         
-    }
-    
-    public function saveData()
-    {
-        
+        $AccountType = $_POST['accounttype'];
+        $Username= $_POST['username'];
+        $Password = $_POST['password'];
+        $FirstName = $_POST['firstname'];
+        $LastName = $_POST['lastname'];
+        $RegisterNumber = $_POST['registernumber'];
+        $Email = $_POST['email'];
+        $Street = $_POST['street'];
+        $CityCode = $_POST['citycode'];
+        $City = $_POST['city'];
+        $PhoneNumber = $_POST['phonenumber'];
+        $ci->db->query("INSERT INTO users VALUES('$AccountType','$Username','$Password','$FirstName','$LastName','$RegisterNumber','$Email','$Street','$CityCode','$City','$PhoneNumber')");
     }
 }
