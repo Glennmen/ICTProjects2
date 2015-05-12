@@ -19,7 +19,7 @@ class NavigationModel extends CI_Model{
         if(($this->iAccountType == 2) || ($this->iAccountType == 1))
         {
             $sMenu = "<ul class='nav navbar-nav'>";
-            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/home' title='home'>Home</a></li>";
+            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/home' title='home'><span class='glyphicon glyphicon-home' aria-hidden='true'></span> Home</a></li>";
             $sMenu .= "<li role='presentation' class='dropdown'><a href='#' class='dropdown-toggle' aria-controls='events-dropdown' role='tab' data-toggle='dropdown' title='events'>Events</a>
                        <ul class='dropdown-menu' role='menu' id='events-dropdown'>
                        <form action='http://localhost/ICTProjects2/trunk/index.php/eventscontroller' method='post' accept-charset='utf-8'>
@@ -30,13 +30,13 @@ class NavigationModel extends CI_Model{
                        </ul></li>";
             $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/login/logout' title='logout'>Logout</a></li></ul>";
             $sMenu .= "<ul class='nav navbar-nav navbar-right'><li>";
-            $sMenu .= "<a>Welcome " .$iAccountName."</a>";
+            $sMenu .= "<a><span class='glyphicon glyphicon-user' aria-hidden='true'></span> Welcome " .$iAccountName."</a>";
             $sMenu .= "</li></ul>";
         }
         else if($this->iAccountType == 3)
         {
             $sMenu = "<ul class='nav navbar-nav'>";
-            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/home' title='home'>Home</a></li>";
+            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/home' title='home'><span class='glyphicon glyphicon-home' aria-hidden='true'></span> Home</a></li>";
             $sMenu .= "<li role='presentation' class='dropdown'><a href='#' class='dropdown-toggle' aria-controls='events-dropdown' role='tab' data-toggle='dropdown' title='events'>Events</a>
                        <ul class='dropdown-menu' role='menu' id='events-dropdown'>
                        <form action='http://localhost/ICTProjects2/trunk/index.php/eventscontroller' method='post' accept-charset='utf-8'>
@@ -45,13 +45,13 @@ class NavigationModel extends CI_Model{
                        </ul></li>";
             $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/login/logout' title='logout'>Logout</a></li></ul>";
             $sMenu .= "<ul class='nav navbar-nav navbar-right'><li>";
-            $sMenu .= "<a>Welcome " .$iAccountName."</a>";
+            $sMenu .= "<a><span class='glyphicon glyphicon-user' aria-hidden='true'></span> Welcome " .$iAccountName."</a>";
             $sMenu .= "</li></ul>";
         }
         else
         {
             $sMenu = "<ul class='nav navbar-nav'>";
-            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/home' title='home'>Home</a></li>";
+            $sMenu .= "<li><a href='/ICTProjects2/trunk/index.php/home' title='home'><span class='glyphicon glyphicon-home' aria-hidden='true'></span> Home</a></li>";
             $sMenu .= "<li role='presentation' class='dropdown'><a href='#' class='dropdown-toggle' aria-controls='events-dropdown' role='tab' data-toggle='dropdown' title='events'>Events</a>
                        <ul class='dropdown-menu' role='menu' id='events-dropdown'>
                        <form action='http://localhost/ICTProjects2/trunk/index.php/eventscontroller' method='post' accept-charset='utf-8'>
