@@ -13,7 +13,7 @@ class LoginClass {
     $ci =& get_instance();
     $ci->load->database();
     
-    $ci->db->select('id, username, password');
+    $ci->db->select('id, username, password, accounttype');
     $ci->db->from('users');
     $ci->db->where('username', $username);
     $ci->db->where('password', MD5($password));

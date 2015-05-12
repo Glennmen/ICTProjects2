@@ -18,6 +18,8 @@ class EventsClass {
      public $sLocation;
      public $iEventID;
      public $iOrganizerID;
+     public $iSessionID;
+     public $iAccountType;
      
      public function getAllEventsData()
      {   
@@ -25,8 +27,17 @@ class EventsClass {
          $ci->load->helper('form');
          try
          {
+         $aUserData = $ci->session->userdata('logged_in');
+         $this->iSessionID = $aUserData['id'];
+         $this->iAccountType = $aUserData['clientType'];
          $sEventsList = form_open();
-         $sEventsList .= "<table class='table table-hover table-bordered'><thead><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
+         if(($this->iAccountType == 2) || $this->iAccountType == 1)
+             {
+                 $sEventsList .= "<div class='form-group'>
+                    <div class='col-sm-10'><p class='form-control-static'><input type='submit' name='myEvents' class='btn btn-default' value='Show my events' /></div></div>";
+             } 
+         $sEventsList .= "<div class='form-group'>
+                    <div class='col-sm-12'><p class='form-control-static'><table class='table table-hover table-bordered'><thead><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
                  . "<th>End date</th><th>Description</th></tr></thead><tbody>";
          $ci->load->database('');
          $sQuery = "SELECT * FROM eventsdatabase";
@@ -45,8 +56,8 @@ class EventsClass {
              $sEventsList .= "<button name='button' class='btn btn-default' value='".$sRow['EventID']."'>View description</button>";
              $sEventsList .= "</td></tr>";
          }
-         $sEventsList .= "</tbody></table>";
-         $sEventsList .= "<input type='submit' name='myEvents' class='btn btn-default' value='Show my events' />";
+         $sEventsList .= "</tbody></table></div></div>";
+           
          $sEventsList .= form_close();
          return $sEventsList;
          } 
@@ -61,6 +72,9 @@ class EventsClass {
          $ci =& get_instance();
          try
          {
+             $aUserData = $ci->session->userdata('logged_in');
+             $this->iSessionID = $aUserData['id'];
+             $this->iAccountType = $aUserData['clientType'];
              $ci->load->helper('form');
              $form = array(
               'class'       => 'form-horizontal'  
@@ -72,6 +86,7 @@ class EventsClass {
              $sData = $ci->db->query($sQuery);
              foreach($sData->result_array() as $sRow)
              {
+             $this->iOrganizerID = $sRow['OrganizerID'];
              $sHtmlEventList .= "<div class='form-group'>
                     <label for='eventname' class='col-sm-2 control-label'>Event name:</label>
                     <div class='col-sm-10'><p class='form-control-static'>".$sRow['EventName']."</p></div></div>"
@@ -98,10 +113,15 @@ class EventsClass {
                     <div class='col-sm-10'><p class='form-control-static'>".$sRow['Location']."</p></div></div>"
                     ."<div class='form-group'>
                     <label for='description' class='col-sm-2 control-label'>Description:</label>
-                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['Description']."</p></div></div>";
-             $sHtmlEventList .= "<div class='form-group'>
-                    <div class='col-sm-offset-2 col-sm-10'><button name='changeForm' class='btn btn-default' value='".$sRow['EventID']."'>Change data</button>";
+                    <div class='col-sm-10'><p class='form-control-static'>".$sRow['Description']."</p></div></div>"
+                     . "<div class='form-group'>
+                    <div class='col-sm-offset-2 col-sm-10'>";
+             if(($this->iOrganizerID == $this->iSessionID) || $this->iAccountType == 1)
+             {
+                 $sHtmlEventList .= "<button name='changeForm' class='btn btn-default' value='".$sRow['EventID']."'>Change data</button>";
              $sHtmlEventList .= "<button name='deleteForm' class='btn btn-default' value='".$sRow['EventID']."'>Delete event</button>";
+             }
+             
              $sHtmlEventList .= "<button name='orderTickets' class='btn btn-default' value='".$sRow['EventID']."'>Order tickets</button></div></div>";
              }
              $sHtmlEventList .= "<div class='form-group'>
@@ -203,7 +223,10 @@ class EventsClass {
          $aUserData = $ci->session->userdata('logged_in');
          $this->iOrganizerID = $aUserData['id'];
          $sEventsList = form_open();
-         $sEventsList .= "<table class='table table-hover table-bordered'><thead><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
+         $sEventsList .= "<div class='form-group'>
+                    <div class='col-sm-10'><p class='form-control-static'><input type='submit' name='backToEvents' class='btn btn-default' value='Eventslist' /></div></div>";
+         $sEventsList .= "<div class='form-group'>
+                    <div class='col-sm-12'><p class='form-control-static'><table class='table table-hover table-bordered'><thead><tr><th>Event name</th><th>Organizer</th><th>Start date</th>"
                  . "<th>End date</th><th>Description</th></tr></thead><tbody>";
          $ci->load->database('');
          $sQuery = "SELECT * FROM eventsdatabase WHERE OrganizerID = '$this->iOrganizerID'";
@@ -222,7 +245,7 @@ class EventsClass {
              $sEventsList .= "<button name='button' class='btn btn-default' value='".$sRow['EventID']."'>View description</button>";
              $sEventsList .= "</td></tr>";
          }
-         $sEventsList .= "</tbody></table>";
+         $sEventsList .= "</tbody></table></div></div>";
          $sEventsList .= form_close();
          return $sEventsList;
          } 
