@@ -157,6 +157,10 @@ class EventsController extends CI_Controller {
         {
             $data['htmlContent'] = $this->EventsModel->getMyEventsModel();
         }
+        if(isset($_POST['orderTickets']))
+        {
+            
+        }
         $this->load->view('view', $data);
     }
 }
