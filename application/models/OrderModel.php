@@ -19,11 +19,11 @@ class OrderModel extends CI_Model{
         parent::__construct();
     }
     
-    public function getOrderForm($sEventname,$dPpt)
+    public function getOrderForm($iEventID)
     {
         try{
         $this->load->library('orderclass');
-        $sOrder = $this->orderclass->getOrderForm($sEventname,$dPpt);
+        $sOrder = $this->orderclass->getOrderForm($iEventID);
         return $sOrder;
     
      } catch (Exception $oError) {

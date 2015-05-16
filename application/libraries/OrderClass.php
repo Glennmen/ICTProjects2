@@ -16,10 +16,24 @@ class OrderClass {
     public $sevents;
     public $dppt;
     
-    public function getOrderForm($sEventName,$dPpt)
+    public function getOrderForm($iEventID)
     {
         
         $ci =& get_instance();
+        
+        
+        $ci->load->database('');
+        $sQuery = "SELECT * FROM eventsdatabase WHERE EventID = ".$iEventID;
+        $sData = $ci->db->query($sQuery);
+        foreach($sData->result_array() as $sRow)
+             {
+                $this->sevents = $sRow['EventName'];
+                $this->dppt = $sRow['PrijsPerTicket'];
+             }
+             
+        
+                   //  $ci->db->query("INSERT INTO users VALUES(null, '$AccountType','$Username','$Password','$FirstName','$LastName','$RegisterNumber','$Email','$Street','$City','$CityCode','$PhoneNumber')");
+
         $ci->load->helper('form');
         $ci->load->library('table');
         
@@ -96,6 +110,20 @@ class OrderClass {
              'style'      => 'width:50%',
          );
          
+        $aUserData = $ci->session->userdata('logged_in');
+        $sUsername = $aUserData['id'];
+        $sQuery = "SELECT * FROM users WHERE  Username = ".$sUsername;     
+        $sData = $ci->db->query($sQuery);
+        foreach($sData->result_array() as $sRow)
+             {
+                $this->sname = $sRow['LastName'];
+                $this->sfname = $sRow['FirstName'];
+                $this->sadress = $sRow['Street'];
+                $this->smail = $sRow['Email'].$sRow['City'].$sRow['CityCode'];
+                $this->spassnumber = $sRow['RegisterNumber'];
+               
+                $this->dppt = $sRow['PrijsPerTicket'];
+             }  
              
          $ci->table->add_row("Customer name: ","",  form_input($this->sname));
          $ci->table->add_row("First name: ","",  form_input($this->sfname));
@@ -111,10 +139,7 @@ class OrderClass {
          $htmlContent.=$ci->table->generate();
          $htmlContent.= form_close();
          return $htmlContent;   
-   
     }
-    
-    
     
     public function confirmOrder($aOrder)
     {
