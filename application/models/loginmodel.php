@@ -16,6 +16,7 @@ class LoginModel extends CI_Model {
               'value'       => '',
               'class'       => 'form-control',
               'placeholder' => 'Login',
+                'required' => 'required'
             );
             
             $password = array(
@@ -24,6 +25,7 @@ class LoginModel extends CI_Model {
               'value'       => '',
               'class'       => 'form-control',
               'placeholder' => 'Password',
+                'required' => 'required'
             );
             
             $submit = array(

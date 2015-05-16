@@ -5,11 +5,15 @@
         <group>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/OrderModel.php</file>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/Ordercontroller.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/EventsModel.php</file>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/OrderClass.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/eventscontroller.php</file>
         </group>
         <group>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/MailingClass.php</file>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/login.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/OrderModel.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/Ordercontroller.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/EventsModel.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/OrderClass.php</file>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/eventscontroller.php</file>
         </group>
     </open-files>

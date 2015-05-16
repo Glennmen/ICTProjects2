@@ -20,8 +20,8 @@ class Login extends CI_Controller {
           $data['Menu'] = $this->NavigationModel->Menu();
           $data['htmlContent'] = $this->LoginModel->getLoginForm(); 
           
-          $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-          $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_checkLoginAndPassword');
+          $this->form_validation->set_rules('username', 'Username', 'trim|xss_clean');
+          $this->form_validation->set_rules('password', 'Password', 'trim|xss_clean|callback_checkLoginAndPassword');
 
           if($this->form_validation->run() == FALSE)
           {

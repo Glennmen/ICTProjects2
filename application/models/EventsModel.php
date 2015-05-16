@@ -11,29 +11,7 @@ class EventsModel extends CI_Model {
 	{
 		parent::__construct();
 	}
-        
-    public function getPageTitle()
-    {
-        $sPageTitle = "Events page";
-        return $sPageTitle;
-    }
-        
-    public function eventsHomePage()
-    {
-        $this->load->helper('form');
-        
-        $sEventsHome = form_open();
-        
-        $sEventsHome .= "<table>"
-                . "<tr><td><input type='submit' name='createEvent' value='Create Event' />"
-                . "<input type='submit' name='allEvents' value='Eventslist' /></td></tr>"
-                . "</table>";
-        
-        $sEventsHome .= form_close();
-        
-        return $sEventsHome;
-    }
-        
+            
     public function getAllEvents()
     {
         $this->load->library('eventsclass');

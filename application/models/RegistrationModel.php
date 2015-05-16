@@ -25,91 +25,102 @@ class RegistrationModel extends CI_Model {
         $AccountTypeClass = 'class = "form-control"';
         
         $Username = array(
-              'name'        => 'username',
-              'id'          => 'username',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'Username',
+                'name'        => 'username',
+                'id'          => 'username',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'Username',
+                'required' => 'required'
             );
         
         $Password = array(
-              'name'        => 'password',
-              'id'          => 'password',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'Password',
+                'name'        => 'password',
+                'id'          => 'password',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'Password',
+                'required' => 'required'
             );
         
         $ConfirmPassword = array(
-              'name'        => 'confirmpassword',
-              'id'          => 'confirmpassword',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'Confirm password',
+                'name'        => 'confirmpassword',
+                'id'          => 'confirmpassword',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'Confirm password',
+                'required' => 'required'
             );
         
         $FirstName = array(
-              'name'        => 'firstname',
-              'id'          => 'firstname',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'First name',
+                'name'        => 'firstname',
+                'id'          => 'firstname',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'First name',
+                'required' => 'required'
             );
         
         $LastName = array(
-              'name'        => 'lastname',
-              'id'          => 'lastname',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'Last name',
+                'name'        => 'lastname',
+                'id'          => 'lastname',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'Last name',
+                'required' => 'required'
             );
         
         $RegisterNumber = array(
-              'name'        => 'registernumber',
-              'id'          => 'registernumber',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'Register number',
+                'name'        => 'registernumber',
+                'id'          => 'registernumber',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'Register number',
+                'required' => 'required'
             );
         
         $Email = array(
-              'name'        => 'email',
-              'id'          => 'email',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'E-mail',
+                'name'        => 'email',
+                'id'          => 'email',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'E-mail',
+                'required' => 'required'
             );
         
         $Street = array(
-              'name'        => 'street',
-              'id'          => 'street',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'Street',
+                'name'        => 'street',
+                'id'          => 'street',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'Street',
+                'required' => 'required'
             );
         
         $CityCode = array(
-              'name'        => 'citycode',
-              'id'          => 'citycode',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'City code',
+                'name'        => 'citycode',
+                'id'          => 'citycode',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'City code',
+                'required' => 'required'
             );
         
         $City = array(
-              'name'        => 'city',
-              'id'          => 'city',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'City',
+                'name'        => 'city',
+                'id'          => 'city',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'City',
+                'required' => 'required'
             );
         
         $PhoneNumber = array(
-              'name'        => 'phonenumber',
-              'id'          => 'phonenumber',
-              'value'       => '',
-              'class'       => 'form-control',
-              'placeholder' => 'Phone number',
+                'name'        => 'phonenumber',
+                'id'          => 'phonenumber',
+                'value'       => '',
+                'class'       => 'form-control',
+                'placeholder' => 'Phone number',
+                'required' => 'required'
             );
         
         $Register = array(
