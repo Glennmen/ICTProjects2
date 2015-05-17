@@ -89,6 +89,7 @@ class EventsClass {
              foreach($sData->result_array() as $sRow)
              {
              $this->iOrganizerID = $sRow['OrganizerID'];
+             $this->iAvailableTickets = $sRow['AvailableTickets'];
              $sHtmlEventList .= "<div class='form-group'>
                     <label for='eventname' class='col-sm-2 control-label'>Event name:</label>
                     <div class='col-sm-10'><p class='form-control-static'>".$sRow['EventName']."</p></div></div>"
@@ -126,10 +127,12 @@ class EventsClass {
                  $sHtmlEventList .= "<button name='changeForm' class='btn btn-default' value='".$sRow['EventID']."'>Change data</button>";
              $sHtmlEventList .= "<button name='deleteForm' class='btn btn-default' value='".$sRow['EventID']."'>Delete event</button>";
              }
-             
-             $sHtmlEventList .= "<button name='orderTickets' class='btn btn-default' value='".$sRow['EventID']."'>Order tickets</button></div></div>";
+             if(($ci->session->userdata('logged_in')) & ($this->iAvailableTickets != 0))
+             {
+             $sHtmlEventList .= "<button name='orderTickets' class='btn btn-default' value='".$sRow['EventID']."'>Order tickets</button>";
              }
-             $sHtmlEventList .= "<div class='form-group'>
+             }
+             $sHtmlEventList .= "</div></div><div class='form-group'>
                     <div class='col-sm-offset-2 col-sm-10'><input type='submit' name='backToEvents' class='btn btn-default' value='Eventslist' /></div></div>";
              $sHtmlEventList .= form_close();
              

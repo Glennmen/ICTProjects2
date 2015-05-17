@@ -9,9 +9,12 @@
 class OrderClass {
     public $sname;
     public $sfname;
-    public $sadress;
+    public $sstreet;
+    public $scity;
+    public $scitycode;
     public $smail;
     public $spassnumber;
+    public $sphone;
     public $itickets;
     public $sevents;
     public $dppt;
@@ -20,7 +23,7 @@ class OrderClass {
     {
         
         $ci =& get_instance();
-        
+        $ci->load->helper('form');
         
         $ci->load->database('');
         $sQuery = "SELECT * FROM eventsdatabase WHERE EventID = ".$iEventID;
@@ -30,113 +33,69 @@ class OrderClass {
                 $this->sevents = $sRow['EventName'];
                 $this->dppt = $sRow['PrijsPerTicket'];
              }
-             
         
-                   //  $ci->db->query("INSERT INTO users VALUES(null, '$AccountType','$Username','$Password','$FirstName','$LastName','$RegisterNumber','$Email','$Street','$City','$CityCode','$PhoneNumber')");
-
-        $ci->load->helper('form');
-        $ci->load->library('table');
-        
-        $htmlContent = form_open();
-        
-         $this->sname = array(
-            'name'        => 'customerName',
-            'id'          => 'cname',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-         
-         $this->sfname = array(
-            'name'        => 'firstName',
-            'id'          => 'fname',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-         
-         $this->sadress = array(
-            'name'        => 'adress',
-            'id'          => 'adress',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-        
-        $this->smail = array(
-            'name'        => 'e-mail',
-            'id'          => 'email',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        ); 
-         
-         $this->spassnumber = array(
-            'name'        => 'passnumber',
-            'id'          => 'pass',
-            'value'       => '',
-            'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
-        );
-         
-         $this->itickets = array(
+         $tickets = array(
             'name'        => 'ticketAmount',
             'id'          => 'tickets',
             'value'       => '',
             'maxlength'   => '100',
-            'size'        => '50',
-            'style'       => 'width:50%',
+            'class'       => 'form-control',
+            'required' => 'required'
+        );
+         $form = array(
+              'class'       => 'form-horizontal'  
+        );
+         $submit = array(
+                'name'      => 'Orderbtn',
+                'class'     => 'btn btn-default',
         );
          
-         $this->sevents = array(
-             'name'       => 'event',
-             'id'         => 'event',
-             'value'      => $sEventName,
-             'maxlength'  => '100',
-             'size'       => '50',
-             'style'      => 'width:50%',
-         );
-         $this->dppt = array(
-             'name'       => 'price',
-             'id'         => 'price',
-             'value'      => $dPpt,
-             'maxlength'  => '100',
-             'size'       => '50',
-             'style'      => 'width:50%',
-         );
-         
+        $htmlContent = form_open('', $form); 
+        
         $aUserData = $ci->session->userdata('logged_in');
-        $sUsername = $aUserData['id'];
-        $sQuery = "SELECT * FROM users WHERE  Username = ".$sUsername;     
+        $sID = $aUserData['id'];
+        $sQuery = "SELECT * FROM users WHERE  ID = ".$sID;     
         $sData = $ci->db->query($sQuery);
         foreach($sData->result_array() as $sRow)
              {
-                $this->sname = $sRow['LastName'];
-                $this->sfname = $sRow['FirstName'];
-                $this->sadress = $sRow['Street'];
-                $this->smail = $sRow['Email'].$sRow['City'].$sRow['CityCode'];
-                $this->spassnumber = $sRow['RegisterNumber'];
-               
-                $this->dppt = $sRow['PrijsPerTicket'];
-             }  
-             
-         $ci->table->add_row("Customer name: ","",  form_input($this->sname));
-         $ci->table->add_row("First name: ","",  form_input($this->sfname));
-         $ci->table->add_row("Adress: ","",  form_input($this->sadress));
-         $ci->table->add_row("E-mail: ","",  form_input($this->smail));
-         $ci->table->add_row("Passnumber: ","",  form_input($this->spassnumber));
-         $ci->table->add_row("Ticketamount: ","", form_input($this->itickets));
-         $ci->table->add_row("Event:","", $this->sevents['value']);
-         $ci->table->add_row("Price per ticket:","", $this->dppt['value']);
+                $htmlContent .= "<div class='form-group'>
+                    <label for='lastname' class='col-sm-2 control-label'>Last name:</label>
+                    <div class='col-sm-10'><input type='text' name='lastname' class='form-control' value='".$sRow['Lastname']."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='firstname' class='col-sm-2 control-label'>First name:</label>
+                    <div class='col-sm-10'><input type='text' name='firstname' class='form-control' value='".$sRow['Firstname']."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='registernumber' class='col-sm-2 control-label'>Register number:</label>
+                    <div class='col-sm-10'><input type='text' name='registernumber' class='form-control' value='".$sRow['Registernumber']."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='email' class='col-sm-2 control-label'>E-mail</label>
+                    <div class='col-sm-10'><input type='text' name='email' class='form-control' value='".$sRow['Email']."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='street' class='col-sm-2 control-label'>Street:</label>
+                    <div class='col-sm-10'><input type='text' name='street' class='form-control' value='".$sRow['Street']."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='city' class='col-sm-2 control-label'>City:</label>
+                    <div class='col-sm-10'><input type='text' name='city' class='form-control' value='".$sRow['City']."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='citycode' class='col-sm-2 control-label'>Citycode:</label>
+                    <div class='col-sm-10'><input type='text' name='citycode' class='form-control' value='".$sRow['Citycode']."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='phonenumber' class='col-sm-2 control-label'>Phone number:</label>
+                    <div class='col-sm-10'><input type='text' name='phonenumber' class='form-control' value='".$sRow['Phonenumber']."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='eventname' class='col-sm-2 control-label'>Event name:</label>
+                    <div class='col-sm-10'><input type='text' name='eventname' class='form-control' value='".$this->sevents."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='prijsperticket' class='col-sm-2 control-label'>PrijsPerTicket:</label>
+                    <div class='col-sm-10'><input type='text' name='prijsperticket' class='form-control' value='".$this->dppt ."' /></div></div>";
+                $htmlContent .= "<div class='form-group'>
+                    <label for='ticketAmount' class='col-sm-2 control-label'>Amount tickets:</label><div class='col-sm-10'>";
+                $htmlContent .= form_input($tickets);
+                $htmlContent .= "</div></div>";
+             } 
          
-         $ci->table->add_row(form_submit('submitOrderbtn','Order'),form_reset('Reset','Reset'));
+         $htmlContent .= "<div class='form-group'><div class='col-sm-offset-2 col-sm-10'><button name='Orderbtn' class='btn btn-default' value='".$iEventID."'>Order tickets</button></div></div>";
          
-         $htmlContent.=$ci->table->generate();
          $htmlContent.= form_close();
          return $htmlContent;   
     }
@@ -145,29 +104,60 @@ class OrderClass {
     {
        $this->sname = $aOrder['Name'];
        $this->sfname = $aOrder['fName'];
-       $this->sadress = $aOrder['Adress'];
-       $this->smail = $aOrder['Mail'];
        $this->spassnumber = $aOrder['Pass'];
+       $this->smail = $aOrder['Mail'];
+       $this->sstreet = $aOrder['Street'];
+       $this->scity = $aOrder['City'];
+       $this->scitycode = $aOrder['Citycode'];
+       $this->sphone = $aOrder['Phone'];
        $this->itickets = $aOrder['Tickets'];
        $this->sevents = $aOrder['Event'];
        $this->dppt = $aOrder['Price'];
-        $ci =& get_instance();
-        $htmlContent = form_open();
-        if(isset($_POST['submitOrderbtn']))
-        {
-            
-            $ci->load->database('');
-            $query = "INSERT INTO orderdatabase (CustomerName,FirstName,Adress,Email,Passnumber,Tickets,EventName,PricePerTicket)"
-                    . "VALUES ('$this->sname','$this->sfname','$this->sadress','$this->smail','$this->spassnumber','$this->itickets','$this->sevents','$this->dppt')";
-            $ci->db->query($query);
-            
-            
-            $htmlContent .= '<h2>Order is succesvol geplaatst</h2>';
-             
-        }    
+       $iEventID = $aOrder['EventID'];
+       $mail = $this->smail;
        
+        $ci =& get_instance();
+            
+        $ci->load->database('');
+        $query1 = "INSERT INTO orderdatabase (Lastname,Firstname,Registernumber,Email,Street,City,Citycode,Phonenumber,EventName,PrijsPerTicket,AmountTickets)"
+                . "VALUES ('$this->sname','$this->sfname','$this->spassnumber','$this->smail','$this->sstreet','$this->scity','$this->scitycode','$this->sphone','$this->sevents','$this->dppt','$this->itickets')";
+        $query2 = "SELECT * FROM eventsdatabase WHERE EventID = ".$iEventID;
         
-        $htmlContent .= form_close();
+        $ci->db->trans_start();
+        $sData = $ci->db->query($query2);
+        foreach($sData->result_array() as $sRow)
+            {
+                if($sRow['AvailableTickets'] >= $this->itickets)
+                {
+                $ci->db->query($query1);
+                $newAmount = $sRow['AvailableTickets'] - $this->itickets;
+                }
+                else
+                {
+                    return '<p>Not enough tickets available.</p>';
+                }
+            }
+        $query3 = "UPDATE eventsdatabase SET AvailableTickets = '$newAmount'"
+        . "WHERE EventID = '$iEventID'";
+        $ci->db->query($query3);
+        $ci->db->trans_complete();
+
+        
+        if ($ci->db->trans_status() === FALSE)
+        {
+            return '<p>Something went wrong, please try again.</p>';
+        }
+        
+        $ci->load->library('mailingclass');
+        
+        $message = "Dear ".$aOrder['Name']." ".$aOrder['fName']."\r\n\r\n";
+        $message .= "You have purchased ".$aOrder['Tickets']." tickets for the event: ".$aOrder['Event']."\r\n";
+        $message .= "Your order has been added to our database.\r\n\r\n";
+        $message .= "Thank you for using our TicketService.";
+        
+        $ci->mailingclass->sendMail($mail, $message);
+            
+        $htmlContent = '<p>Order has been placed.</p>';
         
         return $htmlContent;
     }

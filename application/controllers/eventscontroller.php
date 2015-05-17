@@ -179,23 +179,20 @@ class EventsController extends CI_Controller {
         if(isset($_POST['orderTickets']))
         {
             $this->load->model('OrderModel');
-            $this->load->model('NavigationModel');
             $data['Menu'] = $this->NavigationModel->Menu();
             
-           
+            $iEventID = $_POST['orderTickets'];
             $data['htmlContent'] = $this->OrderModel->getOrderForm($iEventID);
             $data['pageTitle'] = "Order";
-        
-       if (isset($_POST['submitOrderbtn']))
+        }
+            
+        if (isset($_POST['Orderbtn']))
         {
+           $this->load->model('OrderModel');
            $this->load->library('form_validation');
+           $iEventID = $_POST['Orderbtn'];
            
-           $this->form_validation->set_rules('customerName','Customer Name','trim|xss_clean|alpha|required');
-           $this->form_validation->set_rules('firstName','First Name','trim|xss_clean|alpha|required');
-           $this->form_validation->set_rules('adress','Adress','trim|xss_clean|required');
-           $this->form_validation->set_rules('e-mail','E-Mail','trim|xss_clean|valid_email|required');
-           $this->form_validation->set_rules('passnumber','PassNumber','trim|xss_clean|numeric|required');
-           $this->form_validation->set_rules('ticketAmount','Ticket Amount','trim|xss_clean|numeric|is_natural_no_zero|required');
+           $this->form_validation->set_rules('ticketAmount','Ticket amount','trim|xss_clean|numeric|is_natural_no_zero');
             
            if($this->form_validation->run() == FALSE)
             {
@@ -204,28 +201,31 @@ class EventsController extends CI_Controller {
                 $this->load->library('errorreport');
                   
                 $error = $this->errorreport->Error();
-                $form = $this->OrderModel->getOrderForm();
+                $form = $this->OrderModel->getOrderForm($iEventID);
                 $array = array($error, $form);
                 $data['htmlContent'] = join("", $array);
               }
             }
             else
             {    
-           $aOrder = array(
-               'Name'           => $_POST['customerName'],
-               'fName'          => $_POST['firstName'],
-               'Adress'         => $_POST['adress'],
-               'Mail'           => $_POST['e-mail'],
-               'Pass'           => $_POST['passnumber'],
-               'Tickets'        => $_POST['ticketAmount'],
-               'Event'          => $_POST['event'],
-               'Price'          => $_POST['price'],
-           );
-           $data['htmlContent'] = $this->OrderModel->confirmOrder($aOrder);
+                $aOrder = array(
+                    'Name'           => $_POST['lastname'],
+                    'fName'          => $_POST['firstname'],
+                    'Pass'           => $_POST['registernumber'],
+                    'Mail'           => $_POST['email'],
+                    'Street'         => $_POST['street'],
+                    'City'           => $_POST['city'],
+                    'Citycode'       => $_POST['citycode'],
+                    'Phone'          => $_POST['phonenumber'],
+                    'Event'          => $_POST['eventname'],
+                    'Price'          => $_POST['prijsperticket'],
+                    'Tickets'        => $_POST['ticketAmount'],
+                    'EventID'        => $iEventID
+                );
+                $data['htmlContent'] = $this->OrderModel->confirmOrder($aOrder);
             }
         }
-       
-      }
+        
         $this->load->view('view', $data);
     }
 }
