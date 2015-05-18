@@ -26,5 +26,13 @@ class RegistrationClass {
         $City = $_POST['city'];
         $PhoneNumber = $_POST['phonenumber'];
         $ci->db->query("INSERT INTO users VALUES(null, '$AccountType','$Username','$Password','$FirstName','$LastName','$RegisterNumber','$Email','$Street','$City','$CityCode','$PhoneNumber')");
+        
+        $ci->load->library('mailingclass');
+        
+        $message = "Dear ".$LastName." ".$FirstName."\r\n\r\n";
+        $message .= "You have succesfully been registerd to our site.\r\n\r\n";
+        $message .= "Thank you for joining our TicketService.";
+        
+        $ci->mailingclass->sendMail($Email, $message, 'Registation TicketService');
     }
 }

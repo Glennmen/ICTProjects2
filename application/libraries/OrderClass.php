@@ -155,7 +155,7 @@ class OrderClass {
         $message .= "Your order has been added to our database.\r\n\r\n";
         $message .= "Thank you for using our TicketService.";
         
-        $ci->mailingclass->sendMail($mail, $message);
+        $ci->mailingclass->sendMail($mail, $message, 'Order received');
             
         $htmlContent = '<p>Order has been placed.</p>';
         
