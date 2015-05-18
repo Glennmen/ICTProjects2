@@ -3,13 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/OrderModel.php</file>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/Ordercontroller.php</file>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/EventsModel.php</file>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/OrderClass.php</file>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/eventscontroller.php</file>
-        </group>
-        <group>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/loginmodel.php</file>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/EventsClass.php</file>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/MailingClass.php</file>
@@ -17,5 +10,6 @@
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/OrderClass.php</file>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/eventscontroller.php</file>
         </group>
+        <group/>
     </open-files>
 </project-private>
