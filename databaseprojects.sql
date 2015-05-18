@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Gegenereerd op: 12 mei 2015 om 13:18
+-- Gegenereerd op: 18 mei 2015 om 21:32
 -- Serverversie: 5.6.20
 -- PHP-versie: 5.5.15
 
@@ -39,7 +39,46 @@ CREATE TABLE IF NOT EXISTS `eventsdatabase` (
   `PrijsPerTicket` int(10) NOT NULL,
   `Location` varchar(50) NOT NULL,
   `Description` varchar(1000) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `eventsdatabase`
+--
+
+INSERT INTO `eventsdatabase` (`EventID`, `EventName`, `EventOrganizer`, `OrganizerID`, `StartDate`, `EndDate`, `StartTime`, `EndTime`, `AvailableTickets`, `PrijsPerTicket`, `Location`, `Description`) VALUES
+(1, 'TestEvent', 'Glenn', 23, '12-05-2015', '14-05-2015', '21:00:00', '04:00:00', 50, 15, 'Beringen', 'Test event');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `orderdatabase`
+--
+
+CREATE TABLE IF NOT EXISTS `orderdatabase` (
+`OrderID` int(10) NOT NULL,
+  `Lastname` varchar(32) NOT NULL,
+  `Firstname` varchar(32) NOT NULL,
+  `Registernumber` decimal(15,0) NOT NULL,
+  `Email` varchar(64) NOT NULL,
+  `Street` varchar(32) NOT NULL,
+  `City` varchar(32) NOT NULL,
+  `Citycode` int(4) NOT NULL,
+  `Phonenumber` int(10) NOT NULL,
+  `EventName` varchar(50) NOT NULL,
+  `PrijsPerTicket` int(10) NOT NULL,
+  `AmountTickets` int(10) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `orderdatabase`
+--
+
+INSERT INTO `orderdatabase` (`OrderID`, `Lastname`, `Firstname`, `Registernumber`, `Email`, `Street`, `City`, `Citycode`, `Phonenumber`, `EventName`, `PrijsPerTicket`, `AmountTickets`) VALUES
+(1, 'Carremans', 'Glenn', '2147483647', 'glenn.carremans@gmail.com', 'Fazantenlaan 52', 'Beringen', 3583, 478573777, 'TestEvent', 15, 50),
+(2, 'Carremans', 'Glenn', '2147483647', 'glenn.carremans@gmail.com', 'Fazantenlaan 52', 'Beringen', 3583, 478573777, 'TestEvent', 15, 25),
+(3, 'Carremans', 'Glenn', '2147483647', 'glenn.carremans@gmail.com', 'Fazantenlaan 52', 'Beringen', 3583, 478573777, 'TestEvent', 15, 5),
+(4, 'test', 'organiser', '123456789', 'test@gmail.com', 'TestStreet', 'TestCity', 1111, 123456789, 'TestEvent', 15, 10),
+(5, 'test', 'organiser', '123456789', 'glennekes@msn.com', 'TestStreet', 'TestCity', 1111, 123456789, 'TestEvent', 15, 10);
 
 -- --------------------------------------------------------
 
@@ -54,22 +93,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Password` varchar(100) NOT NULL,
   `Firstname` varchar(32) NOT NULL,
   `Lastname` varchar(32) NOT NULL,
-  `Registernumber` int(15) NOT NULL,
+  `Registernumber` decimal(15,0) NOT NULL,
   `Email` varchar(64) NOT NULL,
   `Street` varchar(32) NOT NULL,
   `City` varchar(32) NOT NULL,
   `Citycode` int(4) NOT NULL,
   `Phonenumber` int(10) NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `users`
 --
 
 INSERT INTO `users` (`ID`, `AccountType`, `Username`, `Password`, `Firstname`, `Lastname`, `Registernumber`, `Email`, `Street`, `City`, `Citycode`, `Phonenumber`) VALUES
-(1, '1', 'Admin', '202cb962ac59075b964b07152d234b70', 'admin', 'test', 123456789, 'test@gmail.com', 'TestStreet', 'TestCity', 1111, 123456789),
-(23, '2', 'organiser', '202cb962ac59075b964b07152d234b70', 'organiser', 'test', 123456789, 'test@gmail.com', 'TestStreet', 'TestCity', 1111, 123456789),
-(22, '3', 'client', '202cb962ac59075b964b07152d234b70', 'client', 'test', 123456789, 'test@gmail.com', 'TestStreet', 'TestCity', 1111, 123456789);
+(1, '1', 'Admin', '202cb962ac59075b964b07152d234b70', 'admin', 'test', '123456789', 'test@gmail.com', 'TestStreet', 'TestCity', 1111, 123456789),
+(23, '2', 'organiser', '202cb962ac59075b964b07152d234b70', 'organiser', 'test', '123456789', 'test@gmail.com', 'TestStreet', 'TestCity', 1111, 123456789),
+(22, '3', 'client', '202cb962ac59075b964b07152d234b70', 'client', 'test', '123456789', 'test@gmail.com', 'TestStreet', 'TestCity', 1111, 123456789),
+(26, '3', 'test_glenn', '6a2bcdb84b4b9ffd503b2d0ae9b0673a', 'Glenn', 'Carremans', '94070437969', 'glenn.carremans@gmail.com', 'Fazantenlaan 52', 'Beringen', 3583, 478573777);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -80,6 +120,12 @@ INSERT INTO `users` (`ID`, `AccountType`, `Username`, `Password`, `Firstname`, `
 --
 ALTER TABLE `eventsdatabase`
  ADD PRIMARY KEY (`EventID`);
+
+--
+-- Indexen voor tabel `orderdatabase`
+--
+ALTER TABLE `orderdatabase`
+ ADD PRIMARY KEY (`OrderID`);
 
 --
 -- Indexen voor tabel `users`
@@ -95,12 +141,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `eventsdatabase`
 --
 ALTER TABLE `eventsdatabase`
-MODIFY `EventID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+MODIFY `EventID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT voor een tabel `orderdatabase`
+--
+ALTER TABLE `orderdatabase`
+MODIFY `OrderID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-MODIFY `ID` tinyint(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+MODIFY `ID` tinyint(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
