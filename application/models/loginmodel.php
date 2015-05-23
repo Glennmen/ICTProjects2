@@ -66,3 +66,4 @@ class LoginModel extends CI_Model {
             return $htmlContent;
         }
 }
+?>
