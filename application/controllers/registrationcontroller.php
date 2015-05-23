@@ -39,7 +39,7 @@ class RegistrationController extends CI_Controller {
         $this->form_validation->set_rules('confirmpassword', 'Confirm password', 'trim|xss_clean|max_length[20]');
         $this->form_validation->set_rules('firstname', 'First name', 'trim|xss_clean|max_length[20]');
         $this->form_validation->set_rules('lastname', 'Last name', 'trim|xss_clean|max_length[20]');
-        $this->form_validation->set_rules('registernumber', 'Register number', 'trim|xss_clean|numeric|exact_length[11]');
+        $this->form_validation->set_rules('registernumber', 'Register number', 'trim|xss_clean|exact_length[15]');
         $this->form_validation->set_rules('email', 'E-mail', 'trim|xss_clean|valid_email|is_unique[users.Email]');
         $this->form_validation->set_rules('street', 'street', 'trim|xss_clean|max_length[32]');
         $this->form_validation->set_rules('citycode', 'City code', 'trim|xss_clean|numeric|exact_length[4]');
