@@ -5,13 +5,18 @@
         <group>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/loginmodel.php</file>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/LoginClass.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/index.php</file>
             <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/login.php</file>
         </group>
         <group>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/loginmodel.php</file>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/LoginClass.php</file>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/index.php</file>
-            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/login.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/OrderModel.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/RegistrationModel.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/MailingClass.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/RegistrationClass.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/NavigationModel.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/models/HomeModel.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/libraries/OrderClass.php</file>
+            <file>file:/C:/xampp/htdocs/ICTProjects2/trunk/application/controllers/registrationcontroller.php</file>
         </group>
     </open-files>
 </project-private>
